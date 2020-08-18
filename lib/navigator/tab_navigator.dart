@@ -76,7 +76,7 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
         ));
   }
 
-  Widget _camera(IconData icon) => Container(
+  Container _camera(IconData icon) => Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: [Color(0xfff55363), Color(0xfff77d61)],

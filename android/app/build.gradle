@@ -61,3 +61,12 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'http://www.akixr.top:9000/bucket1-dev/'
+        }
+    }
+}

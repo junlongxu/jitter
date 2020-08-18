@@ -41,12 +41,15 @@ class _PlayerState extends State<Player> {
           ? GestureDetector(
               onTap: () {
                 if (_controller.value.isPlaying) {
-                  setState(() {
-                    _controller.play();
-                  });
+                  _controller.pause();
+                } else {
+                  _controller.play();
                 }
               },
-            )
+              child: AspectRatio(
+                aspectRatio: 0.66,
+                child: VideoPlayer(_controller),
+              ))
           : Text('loading'),
     );
   }
