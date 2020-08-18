@@ -13,42 +13,25 @@ class _HomePageState extends State<HomePage>
   TabController _tabController;
   @override
   void initState() {
-    _tabController = new TabController(length: tabList.length, vsync: this);
+    _tabController =
+        new TabController(length: tabList.length, vsync: this, initialIndex: 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
-      // child: Player(
-      //   url: 'http://www.w3school.com.cn/example/html5/mov_bbb.mp4',
-      // ),
+      // color: Colors.red,
       child: Scaffold(
+        backgroundColor: Colors.black,
         body: Stack(
           children: <Widget>[
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: Container(
-                color: Colors.black,
-              ),
+            HomePosition(
+              widget: _tabPageView(),
             ),
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: _tabPageView(),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              top: 20,
-              child: _tabBarLabel(),
+            HomePosition(
+              top: 20.0,
+              widget: _tabBarLabel(),
             ),
           ],
         ),
@@ -85,15 +68,13 @@ class _HomePageState extends State<HomePage>
         children: tabList.map<Widget>((value) => _tabView(value)).toList());
   }
 
-  _tabBar() {
-    return Text('data');
-  }
-
   _tabView(String name) {
     List<String> list = [
-      'http://www.w3school.com.cn/example/html5/mov_bbb.mp4',
-      'http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4',
-      'http://vfx.mtime.cn/Video/2019/03/19/mp4/190319222227698228.mp4'
+      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1453.MP4',
+      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1458.MP4',
+      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1546.MP4',
+      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1969.MP4',
+     
     ];
     return name != '推荐'
         ? Icon(
@@ -109,4 +90,26 @@ class _HomePageState extends State<HomePage>
   }
   // @override
   // bool get wantKeepAlive => true;
+}
+
+class HomePosition extends StatelessWidget {
+  final double left;
+  final double top;
+  final double right;
+  final double bottom;
+  final Widget widget;
+  const HomePosition(
+      {Key key,
+      this.left = 0,
+      this.top = 0,
+      this.right = 0,
+      this.bottom = 0,
+      @required this.widget})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        left: left, right: right, top: top, bottom: bottom, child: widget);
+  }
 }
