@@ -8,6 +8,6 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   @override
   Widget build(BuildContext context) {
-    return Text('TaskPage');
+    return Center(child: Text('TaskPage'));
   }
 }
