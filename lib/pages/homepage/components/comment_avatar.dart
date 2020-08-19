@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 
 class CommentAvatar extends StatefulWidget {
@@ -8,6 +9,7 @@ class CommentAvatar extends StatefulWidget {
 }
 
 class _CommentAvatarState extends State<CommentAvatar> with Base {
+  bool loveState = false;
   @override
   Column build(BuildContext context) {
     return Column(
@@ -35,21 +37,32 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
             Container(
                 padding: EdgeInsets.only(bottom: 4),
                 alignment: Alignment.center,
-                child: containerGradient(
-                  width: widget?.url != null ? 40 : 20,
-                  height: 20,
-                  // padding: EdgeInsets.only(top: 10),
-                  child: widget?.url != null
-                      ? Text(
-                          '关注',
-                          style: TextStyle(color: Colors.white, fontSize: 10),
-                        )
-                      : Icon(
-                          Icons.done,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                )),
+                child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        loveState = !loveState;
+                      });
+                    },
+                    child: AnimatedSwitcherCounterRoute(
+                      showState: loveState,
+                       alignment: Alignment.centerLeft,
+                      child: containerGradient(
+                        width: loveState ? 36 : 18,
+                        height: 18,
+                        // padding: EdgeInsets.only(top: 10),
+                        child: loveState
+                            ? Text(
+                                '关注',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10),
+                              )
+                            : Icon(
+                                Icons.done,
+                                color: Colors.white,
+                                size: 14,
+                              ),
+                      ),
+                    ))),
           ],
         ),
         Row(

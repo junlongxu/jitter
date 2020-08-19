@@ -58,8 +58,12 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
 class AnimatedSwitcherCounterRoute extends StatefulWidget {
   final bool showState;
   final Widget child;
+  final Alignment alignment;
   const AnimatedSwitcherCounterRoute(
-      {Key key, @required this.showState, @required this.child})
+      {Key key,
+      @required this.showState,
+      this.alignment = Alignment.center,
+      @required this.child})
       : super(key: key);
 
   @override
@@ -81,7 +85,10 @@ class _AnimatedSwitcherCounterRouteState
             duration: const Duration(milliseconds: 200),
             transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
-              return ScaleTransition(child: child, scale: animation, alignment: Alignment.center);
+              return ScaleTransition(
+                  child: child,
+                  scale: animation,
+                  alignment: widget?.alignment);
             },
             child: Container(
               child: widget?.child,
