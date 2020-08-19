@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
-
+// import 'package:flutter/cupertino.dart';
+// import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:jitter/util/animation.dart';
 
 class ShareLoveMessage extends StatefulWidget {
   @override
@@ -17,19 +18,27 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> {
         Column(
           children: <Widget>[
             GestureDetector(
-              onTap: () {
-                setState(() {
-                  loveState = !loveState;
-                });
-              },
-              child: _container(
-                  !loveState
-                      ? 'assets/images/love.png'
-                      : 'assets/images/love_active.png',
-                  '311.1w'),
-            ),
+                onTap: () {
+                  setState(() {
+                    loveState = !loveState;
+                  });
+                },
+                child: AnimatedSwitcherCounterRoute(
+                  showState: loveState,
+                  child: _container(
+                      !loveState
+                          ? 'assets/images/love.png'
+                          : 'assets/images/love_active.png',
+                      '311.1w'),
+                )),
             _container('assets/images/information.png', '311.1w'),
             _container('assets/images/share.png', '分享'),
+            Stack(
+              children: <Widget>[
+                // ScaleAnimationRoute(),
+                AnimatedSwitcherCounterRoute()
+              ],
+            ),
           ],
         )
       ],
