@@ -52,6 +52,7 @@ flutter:
       - assets/images/pause.png
       - assets/images/love.png
       - assets/images/love_active.png
+      - assets/images/love_white.png
       - assets/images/information.png
       - assets/images/share.png
   #   - assets/svgs/home.svg

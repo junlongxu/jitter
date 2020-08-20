@@ -10,6 +10,8 @@ abstract class Base {
       TextStyle(fontSize: 14, color: Color(0xffdedfe1));
   final TextStyle largeTextStyle =
       TextStyle(fontSize: 16, color: Color(0xffdedfe1));
+      final TextStyle maxTextStyle =
+      TextStyle(fontSize: 16, color: Color(0xffdedfe1));
   Shader textGradient(Color beginColor, Color endColor) => LinearGradient(
           colors: [beginColor, endColor],
           begin: Alignment.bottomLeft,
