@@ -276,35 +276,35 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               )
             ],
           ),
-          (item?.child != null && item?.child?.length != 0 && item.child != [])
-              ? Column(
-                  children: <Widget>[
-                    ...item.child.map((childItem) =>
-                        _eachComment(item: childItem, isChild: true)),
-                    GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            loadMoreReplies = !loadMoreReplies;
-                          });
-                        },
-                        child: loadMoreReplies
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    '展开更多回复',
-                                    style: skyGraySmallTextStyle,
-                                  ),
-                                  Icon(Icons.arrow_drop_down, color: skyGray)
-                                ],
-                              )
-                            : LoadingWidget(
-                                loadingType: LoadingType.ballSpin,
-                                size: 15.0,
-                              ))
-                  ],
-                )
-              : emptyWidget,
+          // (item?.child != null && item?.child?.length != 0 && item.child != [])
+          //     ? Column(
+          //         children: <Widget>[
+          //           ...item.child.map((childItem) =>
+          //               _eachComment(item: childItem, isChild: true)),
+          //           GestureDetector(
+          //               onTap: () {
+          //                 setState(() {
+          //                   loadMoreReplies = !loadMoreReplies;
+          //                 });
+          //               },
+          //               child: !loadMoreReplies
+          //                   ? Row(
+          //                       mainAxisAlignment: MainAxisAlignment.center,
+          //                       children: <Widget>[
+          //                         Text(
+          //                           '展开更多回复',
+          //                           style: skyGraySmallTextStyle,
+          //                         ),
+          //                         Icon(Icons.arrow_drop_down, color: skyGray)
+          //                       ],
+          //                     )
+          //                   : LoadingWidget(
+          //                       loadingType: LoadingType.ballSpin,
+          //                       size: 15.0,
+          //                     ))
+          //         ],
+          //       )
+          //     : emptyWidget,
         ],
       ),
     );
