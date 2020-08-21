@@ -125,7 +125,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
           "videoId": "1295362901732765698",
           "commentId": "1296063705758314497",
           "isPraise": 0
-        }
+        },
       ],
       "pageNum": 1,
       "pageSize": 10,
@@ -163,9 +163,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                     ),
                   ),
                   ListViewWidget(
-                      dataList: shareData.list,
-                      callback: _eachComment,
-                      itemWidth: 290),
+                      dataList: shareData.list, callback: _eachComment),
                   Text(
                     '暂无更多',
                     style: smallTextStyle,
@@ -175,12 +173,11 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             ));
   }
 
-  _eachComment(comment, width) {
-    if (comment == null) return null;
+  _eachComment({item, width}) {
+    if (item == null) return null;
     bool shareLoveState = false;
     bool isArrow = false;
     return Column(
-      // key: ValueKey<int>(width),
       children: <Widget>[
         Wrap(
           textDirection: TextDirection.ltr,
@@ -188,7 +185,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
           children: <Widget>[
             CircleAvatar(
                 child: Image.network(
-              comment.headImg,
+              item.headImg,
               width: 40,
               height: 40,
             )),
@@ -196,7 +193,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               child: Wrap(
                 children: <Widget>[
                   Container(
-                    width: width ?? 200,
+                    width: width ?? 290,
                     padding: EdgeInsets.only(left: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,11 +205,10 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                         RichText(
                             text: TextSpan(children: [
                           TextSpan(
-                              text:
-                                  '穿这么短干嘛? 故意引起男人的注意么? 呵呵呵 ${comment.content} !',
+                              text: '穿这么短干嘛? 故意引起男人的注意么? 呵呵呵 ${item.content} !',
                               style: maxTextStyle),
                           TextSpan(
-                              text: '  ${comment.commentDate}',
+                              text: '  ${item.commentDate}',
                               style: TextStyle(color: skyGray))
                         ])),
                       ],
@@ -259,16 +255,14 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             )
           ],
         ),
-        (comment?.child != null &&
-                comment?.child?.length != 0 &&
-                comment.child != [])
+        (item?.child != null && item?.child?.length != 0 && item.child != [])
             ? Container(
                 height: 50,
                 margin: EdgeInsets.only(left: 50),
-                child: _eachComment(comment.child[0], 200),
+                child: _eachComment(item: item.child[0]),
               )
             : Text(
-                ' ',
+                ' 222 ',
                 style: smallTextStyle,
               ),
       ],
@@ -276,12 +270,12 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   }
 
   // 回复的评论
-  _dataiamge(comment) {
-    // return ListViewWidget(dataList: comment?.child, callback: _eachComment, );
-    return comment.child
-        .map((item) => Container(child: _eachComment(item, 200.0)))
-        .toList();
-  }
+  // _dataiamge(comment) {
+  //   // return ListViewWidget(dataList: comment?.child, callback: _eachComment, );
+  //   return comment.child
+  //       .map((item) => Container(child: _eachComment(item, 200.0)))
+  //       .toList();
+  // }
 }
 
 Container _loveContainer(

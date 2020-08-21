@@ -40,9 +40,12 @@ class RootShare {
 
   factory RootShare.fromJson(Map<String, dynamic> json) {
     var list = json['list'] as List;
-    List<ParetShare> paretShareList = list.map((item) {
-      return ParetShare.fromJson(item);
-    }).toList();
+    List<ParetShare> paretShareList;
+    if (list.length != 0) {
+      paretShareList = list.map((item) {
+        return ParetShare.fromJson(item);
+      }).toList();
+    }
 
     return RootShare(
         total: json['total'],
@@ -62,7 +65,7 @@ class RootShare {
         navigatepageNums: json['navigatepageNums'].cast<int>(),
         navigateFirstPage: json['navigateFirstPage'],
         navigateLastPage: json['navigateLastPage'],
-        list: paretShareList);
+        list: paretShareList ?? []);
   }
 
   Map<String, dynamic> toJson() {
@@ -121,9 +124,12 @@ class ParetShare {
 
   factory ParetShare.fromJson(Map<String, dynamic> json) {
     var paretShareChild = json['child'] as List;
-    List<ChildShare> childList = paretShareChild.map((item) {
-      return ChildShare.fromJson(item);
-    }).toList();
+    List<ChildShare> childList;
+    if (paretShareChild.length != 0) {
+      childList = paretShareChild.map((item) {
+        return ChildShare.fromJson(item);
+      }).toList();
+    }
     return ParetShare(
       id: json['id'],
       parentId: json['parentId'],
@@ -137,7 +143,7 @@ class ParetShare {
       videoId: json['videoId'],
       commentId: json['commentId'],
       isPraise: json['isPraise'],
-      child: childList,
+      child: childList ?? [],
     );
   }
 
@@ -174,6 +180,7 @@ class ChildShare {
   final String toReplyUserName;
   final String commentId;
   final int isPraise;
+  final child;
 
   ChildShare(
       {this.id,
@@ -188,7 +195,8 @@ class ChildShare {
       this.toReplyUserImg,
       this.toReplyUserName,
       this.commentId,
-      this.isPraise});
+      this.isPraise,
+      this.child});
 
   factory ChildShare.fromJson(Map<String, dynamic> json) {
     return ChildShare(
@@ -205,6 +213,7 @@ class ChildShare {
       toReplyUserName: json['toReplyUserName'],
       commentId: json['commentId'],
       isPraise: json['isPraise'],
+      child: json['child'] ?? null
     );
   }
 
