@@ -39,26 +39,30 @@ class RootShare {
       this.list});
 
   factory RootShare.fromJson(Map<String, dynamic> json) {
+    var list = json['list'] as List;
+    List<ParetShare> paretShareList = list.map((item) {
+      return ParetShare.fromJson(item);
+    }).toList();
+
     return RootShare(
-      total: json['total'],
-      pageNum: json['pageNum'],
-      pageSize: json['pageSize'],
-      size: json['size'],
-      startRow: json['startRow'],
-      endRow: json['endRow'],
-      pages: json['pages'],
-      prePage: json['prePage'],
-      nextPage: json['nextPage'],
-      isFirstPage: json['isFirstPage'],
-      isLastPage: json['isLastPage'],
-      hasPreviousPage: json['hasPreviousPage'],
-      hasNextPage: json['hasNextPage'],
-      navigatePages: json['navigatePages'],
-      navigatepageNums: json['navigatepageNums'].cast<int>(),
-      navigateFirstPage: json['navigateFirstPage'],
-      navigateLastPage: json['navigateLastPage'],
-      list: json['list'],
-    );
+        total: json['total'],
+        pageNum: json['pageNum'],
+        pageSize: json['pageSize'],
+        size: json['size'],
+        startRow: json['startRow'],
+        endRow: json['endRow'],
+        pages: json['pages'],
+        prePage: json['prePage'],
+        nextPage: json['nextPage'],
+        isFirstPage: json['isFirstPage'],
+        isLastPage: json['isLastPage'],
+        hasPreviousPage: json['hasPreviousPage'],
+        hasNextPage: json['hasNextPage'],
+        navigatePages: json['navigatePages'],
+        navigatepageNums: json['navigatepageNums'].cast<int>(),
+        navigateFirstPage: json['navigateFirstPage'],
+        navigateLastPage: json['navigateLastPage'],
+        list: paretShareList);
   }
 
   Map<String, dynamic> toJson() {
@@ -84,6 +88,7 @@ class RootShare {
   }
 }
 
+// 第一层评论
 class ParetShare {
   String id;
   String parentId;
@@ -114,20 +119,26 @@ class ParetShare {
       this.isPraise,
       this.child});
 
-  ParetShare.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    parentId = json['parentId'];
-    headImg = json['headImg'];
-    userId = json['userId'];
-    nickname = json['nickname'];
-    content = json['content'];
-    commentDate = json['commentDate'];
-    praiseNum = json['praiseNum'];
-    replyNum = json['replyNum'];
-    videoId = json['videoId'];
-    commentId = json['commentId'];
-    isPraise = json['isPraise'];
-    child = json['child'];
+  factory ParetShare.fromJson(Map<String, dynamic> json) {
+    var paretShareChild = json['child'] as List;
+    List<ChildShare> childList = paretShareChild.map((item) {
+      return ChildShare.fromJson(item);
+    }).toList();
+    return ParetShare(
+      id: json['id'],
+      parentId: json['parentId'],
+      headImg: json['headImg'],
+      userId: json['userId'],
+      nickname: json['nickname'],
+      content: json['content'],
+      commentDate: json['commentDate'],
+      praiseNum: json['praiseNum'],
+      replyNum: json['replyNum'],
+      videoId: json['videoId'],
+      commentId: json['commentId'],
+      isPraise: json['isPraise'],
+      child: childList,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -150,19 +161,19 @@ class ParetShare {
 
 // 第二层
 class ChildShare {
-  String id;
-  String parentId;
-  String headImg;
-  String userId;
-  String nickname;
-  String content;
-  String commentDate;
-  String praiseNum;
-  String toReplyUserId;
-  String toReplyUserImg;
-  String toReplyUserName;
-  String commentId;
-  int isPraise;
+  final String id;
+  final String parentId;
+  final String headImg;
+  final String userId;
+  final String nickname;
+  final String content;
+  final String commentDate;
+  final String praiseNum;
+  final String toReplyUserId;
+  final String toReplyUserImg;
+  final String toReplyUserName;
+  final String commentId;
+  final int isPraise;
 
   ChildShare(
       {this.id,
@@ -179,20 +190,22 @@ class ChildShare {
       this.commentId,
       this.isPraise});
 
-  ChildShare.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    parentId = json['parentId'];
-    headImg = json['headImg'];
-    userId = json['userId'];
-    nickname = json['nickname'];
-    content = json['content'];
-    commentDate = json['commentDate'];
-    praiseNum = json['praiseNum'];
-    toReplyUserId = json['toReplyUserId'];
-    toReplyUserImg = json['toReplyUserImg'];
-    toReplyUserName = json['toReplyUserName'];
-    commentId = json['commentId'];
-    isPraise = json['isPraise'];
+  factory ChildShare.fromJson(Map<String, dynamic> json) {
+    return ChildShare(
+      id: json['id'],
+      parentId: json['parentId'],
+      headImg: json['headImg'],
+      userId: json['userId'],
+      nickname: json['nickname'],
+      content: json['content'],
+      commentDate: json['commentDate'],
+      praiseNum: json['praiseNum'],
+      toReplyUserId: json['toReplyUserId'],
+      toReplyUserImg: json['toReplyUserImg'],
+      toReplyUserName: json['toReplyUserName'],
+      commentId: json['commentId'],
+      isPraise: json['isPraise'],
+    );
   }
 
   Map<String, dynamic> toJson() {
