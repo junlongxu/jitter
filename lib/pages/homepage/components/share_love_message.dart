@@ -16,6 +16,22 @@ class ShareLoveMessage extends StatefulWidget {
 class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   bool loveState = false;
   bool shareState = false;
+  String replyShareValue = ''; // 回复评论
+  TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _controller.text = '评论';
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Row build(BuildContext context) {
     return Row(
@@ -181,6 +197,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               ),
             ),
             ListViewWidget(dataList: shareData.list, callback: _eachComment),
+            _replyShare()
           ],
         ),
       ),
@@ -191,9 +208,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   _eachComment({item, bool isChild = false}) {
     if (item == null) return null;
     bool shareLoveState = false;
-    bool loadMoreReplies = false;
+    bool loadMoreReplies = false; // 加载更多
     bool isArrow = false;
-    // 加载更多回复
     return Container(
       padding: EdgeInsets.only(left: !isChild ? 0 : 40, top: 4),
       child: Column(
@@ -276,35 +292,35 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               )
             ],
           ),
-          // (item?.child != null && item?.child?.length != 0 && item.child != [])
-          //     ? Column(
-          //         children: <Widget>[
-          //           ...item.child.map((childItem) =>
-          //               _eachComment(item: childItem, isChild: true)),
-          //           GestureDetector(
-          //               onTap: () {
-          //                 setState(() {
-          //                   loadMoreReplies = !loadMoreReplies;
-          //                 });
-          //               },
-          //               child: !loadMoreReplies
-          //                   ? Row(
-          //                       mainAxisAlignment: MainAxisAlignment.center,
-          //                       children: <Widget>[
-          //                         Text(
-          //                           '展开更多回复',
-          //                           style: skyGraySmallTextStyle,
-          //                         ),
-          //                         Icon(Icons.arrow_drop_down, color: skyGray)
-          //                       ],
-          //                     )
-          //                   : LoadingWidget(
-          //                       loadingType: LoadingType.ballSpin,
-          //                       size: 15.0,
-          //                     ))
-          //         ],
-          //       )
-          //     : emptyWidget,
+          (item?.child != null && item?.child?.length != 0 && item.child != [])
+              ? Column(
+                  children: <Widget>[
+                    ...item.child.map((childItem) =>
+                        _eachComment(item: childItem, isChild: true)),
+                    GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            loadMoreReplies = !loadMoreReplies;
+                          });
+                        },
+                        child: !loadMoreReplies
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    '展开更多回复',
+                                    style: skyGraySmallTextStyle,
+                                  ),
+                                  Icon(Icons.arrow_drop_down, color: skyGray)
+                                ],
+                              )
+                            : LoadingWidget(
+                                loadingType: LoadingType.ballSpin,
+                                size: 15.0,
+                              ))
+                  ],
+                )
+              : emptyWidget,
         ],
       ),
     );
@@ -317,6 +333,21 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   //       .map((item) => Container(child: _eachComment(item, 200.0)))
   //       .toList();
   // }
+  _replyShare() {
+    return TextField(
+      controller: _controller,
+      onChanged: (value) {
+        replyShareValue = value;
+      },
+      // cursorColor: Colors.red,
+      style: maxTextStyle,
+      decoration: InputDecoration(
+        hintText: "请输入帐号",
+        // border: InputBorder.none, //输入边框设为null
+        suffix: Image.asset("assets/images/love.png", width: 20),
+      ),
+    );
+  }
 }
 
 Container _loveContainer(
