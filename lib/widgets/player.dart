@@ -36,6 +36,8 @@ class _PlayerState extends State<Player> {
     return Container(
       width: double.infinity,
       height: double.infinity,
+      // width: MediaQuery.of(context).size.width,
+      // height: MediaQuery.of(context).size.height,
       alignment: Alignment.center,
       child: _controller.value.initialized
           ? GestureDetector(

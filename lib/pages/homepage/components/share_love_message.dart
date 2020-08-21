@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:jitter/model/share.dart';
 import 'package:flutter/material.dart';
+import 'package:jitter/pages/mypage/index.dart';
 import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 import 'dart:convert';
@@ -15,7 +16,7 @@ class ShareLoveMessage extends StatefulWidget {
 
 class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   bool loveState = false;
-  bool shareState = false;
+  // bool shareState = false;
   String replyShareValue = ''; // 回复评论
   TextEditingController _controller = TextEditingController();
 
@@ -61,7 +62,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               child: _loveContainer('assets/images/information.png', '311.1w'),
             ),
             FloatingActionButton(
-                // onPressed: launch('weixin://'),
+                onPressed: _shareBottomBox,
                 elevation: 0.0,
                 highlightElevation: 0.01,
                 backgroundColor: Colors.transparent,
@@ -196,7 +197,9 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                 style: mediumTextStyle,
               ),
             ),
+            // 评论
             ListViewWidget(dataList: shareData.list, callback: _eachComment),
+            //  回复评论输入框
             _replyShare()
           ],
         ),
@@ -210,6 +213,21 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
     bool shareLoveState = false;
     bool loadMoreReplies = false; // 加载更多
     bool isArrow = false;
+    return ListTile(
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.network(
+          item['headImg'],
+          width: 40,
+          height: 40,
+        ),
+      ),
+      title: Text(item['name']),
+      subtitle: Text(item['content']),
+      // onTap: () {
+      //   _switchReply(item['name']);
+      // },
+    );
     return Container(
       padding: EdgeInsets.only(left: !isChild ? 0 : 40, top: 4),
       child: Column(
@@ -326,27 +344,49 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
     );
   }
 
-  // 回复的评论
-  // _dataiamge(comment) {
-  //   // return ListViewWidget(dataList: comment?.child, callback: _eachComment, );
-  //   return comment.child
-  //       .map((item) => Container(child: _eachComment(item, 200.0)))
-  //       .toList();
-  // }
+//  回复评论输入框
   _replyShare() {
     return TextField(
+      scrollPadding: EdgeInsets.only(left: 20, right: 20),
       controller: _controller,
       onChanged: (value) {
         replyShareValue = value;
       },
-      // cursorColor: Colors.red,
       style: maxTextStyle,
+      // focusNode: ,
       decoration: InputDecoration(
-        hintText: "请输入帐号",
-        // border: InputBorder.none, //输入边框设为null
-        suffix: Image.asset("assets/images/love.png", width: 20),
+        hintText: "请输入",
+        suffix: replyShareValue.length > 0
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _controller.clear();
+                  });
+                },
+                child: Icon(
+                  Icons.clear,
+                  size: 24,
+                  color: Colors.white,
+                ),
+              )
+            : emptyWidget,
       ),
     );
+  }
+
+  // 分享
+  _shareBottomBox() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) => Container(
+              height: 160,
+              child: Column(
+                children: <Widget>[
+                  Text('微信'),
+                  Text('QQ'),
+                ],
+              ),
+            ));
   }
 }
 
@@ -373,27 +413,3 @@ Container _loveContainer(
         ],
       ),
     );
-
-// class AnimateGestureDetector{
-//   bool loveState;
-//   final Widget child;
-
-//   AnimateGestureDetector({this.loveState, @required this.child});
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//                 onTap: () {
-//                   setState(() {
-//                     loveState = !loveState;
-//                   });
-//                 },
-//                 child: AnimatedSwitcherCounterRoute(
-//                   showState: loveState,
-//                   child: _container(
-//                       !loveState
-//                           ? 'assets/images/love.png'
-//                           : 'assets/images/love_active.png',
-//                       '311.1w'),
-//                 )),;
-//   }
-// }

@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage>
               child: _tabPageView(),
             ),
             HomePosition(
-              top: 20.0,
+              top: 10.0,
               child: _tabBarLabel(),
             ),
           ],
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage>
                 children: <Widget>[
                   Player(url: list[index]),
                   HomePosition(
-                    top: 560,
+                    top: 540,
                     left: 20,
                     bottom: 20,
                     child: CommentAvatar(
