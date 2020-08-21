@@ -4,6 +4,10 @@ abstract class Base {
   final Color themeColor = Color(0xff242a37);
   final Color skyGray = Color(0xff727e99);
   final double boundarySize = 10.0;
+
+  final TextStyle skyGraySmallTextStyle =
+      TextStyle(fontSize: 12, color: Color(0xff727e99));
+  
   final TextStyle smallTextStyle =
       TextStyle(fontSize: 12, color: Color(0xffdedfe1));
   final TextStyle mediumTextStyle =
@@ -42,4 +46,5 @@ abstract class Base {
         ),
         child: child,
       );
+  get emptyWidget => Container(width: 0, height: 0);
 }

@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage>
             itemBuilder: (BuildContext context, int index) {
               return Stack(
                 children: <Widget>[
-                  // Player(url: list[index]),
+                  Player(url: list[index]),
                   HomePosition(
                     top: 560,
                     left: 20,

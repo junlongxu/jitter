@@ -19,8 +19,27 @@ class _ListViewWidgetState extends State<ListViewWidget> with Base {
         child: ListView.builder(
             itemCount: widget?.dataList?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
-              return _listItem(item: widget?.dataList[index]);
+              return Column(
+                children: <Widget>[
+                  _listItem(item: widget?.dataList[index]),
+                  _bottomNot(index)
+                ],
+              );
             }));
+  }
+
+  _bottomNot(int index) {
+    if (index == widget?.dataList?.length - 1) {
+      return Container(
+        margin: EdgeInsets.only(bottom: 6),
+        child: Text(
+          '暂时没有更多了',
+          style: smallTextStyle,
+        ),
+      );
+    } else {
+      return emptyWidget;
+    }
   }
 
   _listItem({item}) => Container(

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
-import 'package:loading/loading.dart';
-import 'package:loading/indicator/ball_spin_fade_loader_indicator.dart';
-
+import 'package:jitter/widgets/loading_widget.dart';
 class Player extends StatefulWidget {
   final String url;
   const Player({@required this.url});
@@ -83,7 +81,7 @@ class _PlayerState extends State<Player> {
             // top: 54,
  
             )
-          : Loading(indicator: BallSpinFadeLoaderIndicator(), size: 30.0),
+          : LoadingWidget(loadingType: LoadingType.ballSpin, size: 30.0,),
     );
   }
 }
