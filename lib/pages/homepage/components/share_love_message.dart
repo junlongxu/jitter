@@ -28,6 +28,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   @override
   void initState() {
     _controller.text = '说点什么吧 !';
+
     super.initState();
   }
 
@@ -241,12 +242,10 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       margin: EdgeInsets.fromLTRB(0, 8, 10, 8),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Image.network(
-          item.headImg,
-          width: !isChild ? 40 : 30,
-          height: !isChild ? 40 : 30,
-          fit: BoxFit.cover
-        ),
+        child: Image.network(item.headImg,
+            width: !isChild ? 40 : 30,
+            height: !isChild ? 40 : 30,
+            fit: BoxFit.cover),
       ),
     );
     // 名字和内容
@@ -261,7 +260,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
           text: TextSpan(children: [
             TextSpan(
                 text:
-                    '起男人的多阿萨达算哒算123阿斯萨达萨达撒阿斯顿撒阿斯达四大多多多多多多多多多多多多多多多多多多大萨达萨达撒大所大所达四大水电费第三方sadasa哒呵呵 ${item.content} !',
+                    '起男人的多阿萨达算哒算123阿斯萨达萨达撒阿斯顿撒电费第三方sadasa哒呵呵 ${item.content} !',
                 style: mediumTextStyle),
             TextSpan(
                 text: '  ${item.commentDate}', style: skyGraySmallTextStyle)
@@ -270,20 +269,24 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       ],
     );
     // 右侧心心
-    var rightIcon = GestureDetector(
-        onTap: () {
-          setState(() {
-            shareLoveState = !shareLoveState;
-          });
-        },
-        child: AnimatedSwitcherCounterRoute(
-          showState: shareLoveState,
-          child: _loveContainer(
-              !shareLoveState
-                  ? 'assets/images/love/invalid_name.png'
-                  : 'assets/images/love_active/invalid_name.png',
-              '311.1w'),
-        ));
+    var rightIcon = StatefulBuilder(
+      builder: (context, state) {
+        return GestureDetector(
+            onTap: () {
+              state(() {
+                shareLoveState = !shareLoveState;
+              });
+            },
+            child: AnimatedSwitcherCounterRoute(
+              showState: shareLoveState,
+              child: _loveContainer(
+                  !shareLoveState
+                      ? 'assets/images/love_white/invalid_name.png'
+                      : 'assets/images/love_active/invalid_name.png',
+                  '59'),
+            ));
+      },
+    );
     // 子评论
     var itemChild = (item?.child != null &&
             item?.child?.length != 0 &&
@@ -292,27 +295,15 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             children: <Widget>[
               ...item.child
                   .map((childItem) => _item(item: childItem, isChild: true)),
-              GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      loadMoreReplies = !loadMoreReplies;
-                    });
-                  },
-                  child: !loadMoreReplies
-                      ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              '展开更多回复',
-                              style: skyGraySmallTextStyle,
-                            ),
-                            Icon(Icons.arrow_drop_down, color: skyGray)
-                          ],
-                        )
-                      : LoadingWidget(
-                          loadingType: LoadingType.ballSpin,
-                          size: 15.0,
-                        ))
+              StatefulBuilder(
+                builder: (context, state) => GestureDetector(
+                    onTap: () {
+                      state(() {
+                        loadMoreReplies = !loadMoreReplies;
+                      });
+                    },
+                    child: _loading(loadMoreReplies)),
+              )
             ],
           )
         : emptyWidget;
@@ -328,14 +319,39 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       ],
     );
     return Container(
-        padding: EdgeInsets.only(left: !isChild ? 10 : 50, right: !isChild ? 10 : 0),
-            // EdgeInsets.symmetric(horizontal: !isChild ? 10 : 0, vertical: 6),
+        padding: EdgeInsets.only(
+            left: !isChild ? 10 : 50, right: !isChild ? 10 : 0, top: 8),
+        // EdgeInsets.symmetric(horizontal: !isChild ? 10 : 0, vertical: 6),
         child: Column(
           children: <Widget>[
             completeCommentItem,
             itemChild,
           ],
         ));
+  }
+
+  // 评论loading加载更多回复
+  _loading(bool loading) {
+    return Container(
+      // padding: EdgeInsets.all(10),
+      height: 30,
+      width: 200,
+      child: !loading
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  '展开更多回复',
+                  style: skyGraySmallTextStyle,
+                ),
+                Icon(Icons.arrow_drop_down, color: skyGray)
+              ],
+            )
+          : LoadingWidget(
+              loadingType: LoadingType.ballSpin,
+              size: 16.0,
+            ),
+    );
   }
 
 //  回复评论输入框
@@ -386,12 +402,14 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
 
 // 爱心
 Container _loveContainer([String imageUrl, String description]) => Container(
+      // width: 50,
+      height: 50,
       child: Column(
         children: <Widget>[
           Image.asset(
             imageUrl,
-            width: 36,
-            height: 36,
+            width: 30,
+            height: 30,
           ),
           Text(
             description,
