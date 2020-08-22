@@ -63,8 +63,7 @@ class AnimatedSwitcherCounterRoute extends StatefulWidget {
       {Key key,
       @required this.showState,
       this.alignment = Alignment.center,
-      @required this.child})
-      : super(key: key);
+      @required this.child});
 
   @override
   _AnimatedSwitcherCounterRouteState createState() =>

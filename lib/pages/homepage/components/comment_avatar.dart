@@ -25,7 +25,6 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
                   height: 36,
                 )),
             Container(
-              
               padding: EdgeInsets.only(left: 5,right: 5),
               child: Text(
                 '@色情网1111',

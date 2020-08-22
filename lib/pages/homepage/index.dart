@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage>
                 width: 300,
                 child: Stack(
                   children: <Widget>[
-                    Player(url: list[index]),
+                    // Player(url: list[index]),
                     HomePosition(
                       top: MediaQuery.of(context).size.height * 0.7,
                       left: 10,
@@ -100,8 +100,8 @@ class _HomePageState extends State<HomePage>
                               'http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n1@2x.png'),
                     ),
                     HomePosition(
-                      top: MediaQuery.of(context).size.height * 0.4,
-                      right: 10,
+                      top: MediaQuery.of(context).size.height * 0.35,
+                      left: MediaQuery.of(context).size.width * 0.8,
                       child: ShareLoveMessage(),
                     ),
                    

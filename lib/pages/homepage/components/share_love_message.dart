@@ -1,13 +1,17 @@
 import 'dart:ui';
 import 'package:jitter/model/share.dart';
 import 'package:flutter/material.dart';
+import 'package:jitter/pages/homepage/components/bottom.dart';
 import 'package:jitter/pages/mypage/index.dart';
 import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 import 'dart:convert';
+import 'package:jitter/widgets/loading_widget.dart';
 
 import 'package:jitter/widgets/list_view_widget.dart';
-import 'package:jitter/widgets/loading_widget.dart';
+
+/// 单独修改了bottomSheet组件的高度
+import 'package:jitter/dart/bottomSheet.dart' as CustomBottomSheet;
 
 class ShareLoveMessage extends StatefulWidget {
   @override
@@ -16,14 +20,14 @@ class ShareLoveMessage extends StatefulWidget {
 
 class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   bool loveState = false;
+  bool shareLoveState = false;
   // bool shareState = false;
   String replyShareValue = ''; // 回复评论
   TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
-    _controller.text = '评论';
+    _controller.text = '说点什么吧 !';
     super.initState();
   }
 
@@ -34,46 +38,58 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   }
 
   @override
-  Row build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+  Column build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            GestureDetector(
-                onTap: () {
-                  setState(() {
-                    loveState = !loveState;
-                  });
-                },
-                child: AnimatedSwitcherCounterRoute(
-                  showState: loveState,
-                  child: _loveContainer(
-                      !loveState
-                          ? 'assets/images/love/invalid_name.png'
-                          : 'assets/images/love_active/invalid_name.png',
-                      '311.1w'),
-                )),
-            FloatingActionButton(
-              onPressed: _showModalBottomSheet,
+        _itemRightIconHeight(
+          child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  loveState = !loveState;
+                });
+              },
+              child: AnimatedSwitcherCounterRoute(
+                showState: loveState,
+                child: _loveContainer(
+                    !loveState
+                        ? 'assets/images/love/invalid_name.png'
+                        : 'assets/images/love_active/invalid_name.png',
+                    '311.1w'),
+              )),
+        ),
+        _itemRightIconHeight(
+          child: FloatingActionButton(
+            onPressed: _showModalBottomSheet,
+            elevation: 0.0,
+            highlightElevation: 0.01,
+            backgroundColor: Colors.transparent,
+            child: _loveContainer(
+                'assets/images/information/invalid_name.png', '311.1w'),
+          ),
+        ),
+        _itemRightIconHeight(
+          child: FloatingActionButton(
+              onPressed: _shareBottomBox,
               elevation: 0.0,
               highlightElevation: 0.01,
               backgroundColor: Colors.transparent,
-              child: _loveContainer('assets/images/information/invalid_name.png', '311.1w'),
-            ),
-            FloatingActionButton(
-                onPressed: _shareBottomBox,
-                elevation: 0.0,
-                highlightElevation: 0.01,
-                backgroundColor: Colors.transparent,
-                child: _loveContainer('assets/images/share/invalid_name.png', '分享')),
-          ],
+              child:
+                  _loveContainer('assets/images/share/invalid_name.png', '分享')),
         )
       ],
     );
   }
 
+  // 右侧每个icon设置高度
+  _itemRightIconHeight({Widget child}) {
+    return Container(
+      margin: EdgeInsets.only(top: 30),
+      child: child,
+    );
+  }
+
+  // 底部弹框
   Future _showModalBottomSheet() {
     var data = {
       "total": "3",
@@ -183,134 +199,142 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
     Utf8Decoder utf8decoder = Utf8Decoder();
     // var data1 =json.decode(data.list);
     RootShare shareData = RootShare.fromJson(data);
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
-        height: 500,
-        padding: EdgeInsets.all(boundarySize),
-        color: themeColor,
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(bottom: 4),
-              height: 4,
-              width: 32,
+    CustomBottomSheet.showModalBottomSheet(
+        backgroundColor: Colors.white.withOpacity(0),
+        context: context,
+        builder: (context) => Container(
+              margin: EdgeInsets.zero,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(2),
+                  color: themeColor,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(10))),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.all(4),
+                    height: 4,
+                    width: 32,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  Container(
+                    height: 20,
+                    alignment: Alignment.center,
+                    child: Text(
+                      '328464条评论',
+                      style: mediumTextStyle,
+                    ),
+                  ),
+                  ListViewWidget(dataList: shareData.list, callback: _item)
+                ],
               ),
-            ),
-            Container(
-              height: 30,
-              child: Text(
-                '328464条评论',
-                style: mediumTextStyle,
-              ),
-            ),
-            // 评论
-            ListViewWidget(dataList: shareData.list, callback: _eachComment),
-            //  回复评论输入框
-            _replyShare()
-          ],
+            ));
+  }
+
+  // 评论消息
+  _item({item, bool isChild = false}) {
+    bool loadMoreReplies = false;
+    // 头像
+    var leftImag = Container(
+      margin: EdgeInsets.fromLTRB(0, 8, 10, 8),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Image.network(
+          item.headImg,
+          width: !isChild ? 40 : 30,
+          height: !isChild ? 40 : 30,
+          fit: BoxFit.cover
         ),
       ),
     );
-  }
-
-  // 父评论和子评论
-  _eachComment({item, bool isChild = false}) {
-    if (item == null) return null;
-    bool shareLoveState = false;
-    bool loadMoreReplies = false; // 加载更多
-    
-    return Container(
-        constraints: BoxConstraints(minHeight: 80),
-        child: ListTile(
-          contentPadding: EdgeInsets.all(0),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(!isChild ? 20 : 15),
-            child: Image.network(
-              item.headImg,
-              width: !isChild ? 40 : 30,
-              height: !isChild ? 40 : 30,
-            ),
-          ),
-          // isThreeLine: true,
-          // enabled: true,
-          // isThreeLine: true,
-          // dense: true,
-          title: Text(
-            item.nickname,
-            style: skyGraySmallTextStyle,
-          ),
-          subtitle: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    // 名字和内容
+    var info = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          item.nickname,
+          style: skyGraySmallTextStyle,
+        ),
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+                text:
+                    '起男人的多阿萨达算哒算123阿斯萨达萨达撒阿斯顿撒阿斯达四大多多多多多多多多多多多多多多多多多多大萨达萨达撒大所大所达四大水电费第三方sadasa哒呵呵 ${item.content} !',
+                style: mediumTextStyle),
+            TextSpan(
+                text: '  ${item.commentDate}', style: skyGraySmallTextStyle)
+          ]),
+        )
+      ],
+    );
+    // 右侧心心
+    var rightIcon = GestureDetector(
+        onTap: () {
+          setState(() {
+            shareLoveState = !shareLoveState;
+          });
+        },
+        child: AnimatedSwitcherCounterRoute(
+          showState: shareLoveState,
+          child: _loveContainer(
+              !shareLoveState
+                  ? 'assets/images/love/invalid_name.png'
+                  : 'assets/images/love_active/invalid_name.png',
+              '311.1w'),
+        ));
+    // 子评论
+    var itemChild = (item?.child != null &&
+            item?.child?.length != 0 &&
+            item.child != [])
+        ? Column(
             children: <Widget>[
-              RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: '起男人的注意么1? 呵呵呵 ${item.content} !',
-                      style: mediumTextStyle),
-                  TextSpan(
-                      text: '  ${item.commentDate}',
-                      style: skyGraySmallTextStyle)
-                ]),
-              ),
-              // 子评论
-              (item?.child != null &&
-                      item?.child?.length != 0 &&
-                      item.child != [])
-                  ? Column(
-                      children: <Widget>[
-                        ...item.child.map((childItem) =>
-                            _eachComment(item: childItem, isChild: true)),
-                        GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                loadMoreReplies = !loadMoreReplies;
-                              });
-                            },
-                            child: !loadMoreReplies
-                                ? Row(
-                                    children: <Widget>[
-                                      Text(
-                                        '展开更多回复',
-                                        style: skyGraySmallTextStyle,
-                                      ),
-                                      Icon(Icons.arrow_drop_down,
-                                          color: skyGray)
-                                    ],
-                                  )
-                                : LoadingWidget(
-                                    loadingType: LoadingType.ballSpin,
-                                    size: 15.0,
-                                  ))
-                      ],
-                    )
-                  : emptyWidget,
+              ...item.child
+                  .map((childItem) => _item(item: childItem, isChild: true)),
+              GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      loadMoreReplies = !loadMoreReplies;
+                    });
+                  },
+                  child: !loadMoreReplies
+                      ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              '展开更多回复',
+                              style: skyGraySmallTextStyle,
+                            ),
+                            Icon(Icons.arrow_drop_down, color: skyGray)
+                          ],
+                        )
+                      : LoadingWidget(
+                          loadingType: LoadingType.ballSpin,
+                          size: 15.0,
+                        ))
             ],
-          ),
-          trailing: Container(
-            width: 30,
-            child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    shareLoveState = !shareLoveState;
-                  });
-                },
-                child: AnimatedSwitcherCounterRoute(
-                  showState: shareLoveState,
-                  child: _loveContainer(
-                      !shareLoveState
-                          ? 'assets/images/love_white/invalid_name.png'
-                          : 'assets/images/love_active/invalid_name.png',
-                      '1.6w'),
-                )),
-          ),
-          onTap: () {
-            // _switchReply(item['name']);
-          },
+          )
+        : emptyWidget;
+
+    var completeCommentItem = Row(
+      crossAxisAlignment: CrossAxisAlignment.start, // 解决图片基线中间对其的情况
+      children: <Widget>[
+        leftImag,
+        Expanded(
+          child: info,
+        ),
+        rightIcon
+      ],
+    );
+    return Container(
+        padding: EdgeInsets.only(left: !isChild ? 10 : 50, right: !isChild ? 10 : 0),
+            // EdgeInsets.symmetric(horizontal: !isChild ? 10 : 0, vertical: 6),
+        child: Column(
+          children: <Widget>[
+            completeCommentItem,
+            itemChild,
+          ],
         ));
   }
 
@@ -361,10 +385,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
 }
 
 // 爱心
-Container _loveContainer(
-        [String imageUrl, String description, bool isHideText = false]) =>
-    Container(
-      // height: 50,
+Container _loveContainer([String imageUrl, String description]) => Container(
       child: Column(
         children: <Widget>[
           Image.asset(
@@ -372,15 +393,11 @@ Container _loveContainer(
             width: 36,
             height: 36,
           ),
-          !isHideText
-              ? Text(
-                  description,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300),
-                )
-              : Text('')
+          Text(
+            description,
+            style: TextStyle(
+                color: Colors.white, fontSize: 12, fontWeight: FontWeight.w300),
+          )
         ],
       ),
     );
