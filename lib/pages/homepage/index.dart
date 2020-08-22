@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage>
               child: _tabPageView(),
             ),
             HomePosition(
-              top: 10.0,
+              top: 20.0,
               child: _tabBarLabel(),
             ),
           ],
@@ -86,24 +86,27 @@ class _HomePageState extends State<HomePage>
             itemCount: list?.length ?? 0,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, int index) {
-              return Stack(
-                children: <Widget>[
-                  Player(url: list[index]),
-                  HomePosition(
-                    top: 540,
-                    left: 20,
-                    bottom: 20,
-                    child: CommentAvatar(
-                        url:
-                            'http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n1@2x.png'),
-                  ),
-                  HomePosition(
-                    top: 350,
-                    right: 20,
-                    bottom: 0,
-                    child: ShareLoveMessage(),
-                  ),
-                ],
+              return Container(
+                height: 300,
+                width: 300,
+                child: Stack(
+                  children: <Widget>[
+                    Player(url: list[index]),
+                    HomePosition(
+                      top: MediaQuery.of(context).size.height * 0.7,
+                      left: 10,
+                      child: CommentAvatar(
+                          url:
+                              'http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n1@2x.png'),
+                    ),
+                    HomePosition(
+                      top: MediaQuery.of(context).size.height * 0.4,
+                      right: 10,
+                      child: ShareLoveMessage(),
+                    ),
+                   
+                  ],
+                ),
               );
             });
   }

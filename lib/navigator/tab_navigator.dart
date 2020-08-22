@@ -42,40 +42,22 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
               });
             },
             items: [
-              _svgWidget(CustomIcons.home, '首页', 0),
-              _svgWidget(CustomIcons.community, '社区', 1),
-              _svgWidget(CustomIcons.camera, '', 2),
-              _svgWidget(CustomIcons.task, '任务', 3),
-              _svgWidget(CustomIcons.my, '我的', 4)
+              _svgWidget('home', '首页', 0),
+              _svgWidget('community', '社区', 1),
+              _svgWidget('camera', '', 2),
+              _svgWidget('task', '任务', 3),
+              _svgWidget('my', '我的', 4)
             ]));
   }
 
-  BottomNavigationBarItem _svgWidget(IconData icon, String title, int index) {
+  BottomNavigationBarItem _svgWidget(String img, String title, int index) {
     return BottomNavigationBarItem(
-        icon: title == ''
-            ? containerGradient(
-                isCircular: true,
-                width: 40,
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 40,
-                ))
-            : Icon(icon,
-                color: Colors.white,
-                size: 26,
-                textDirection: TextDirection.rtl),
-        activeIcon: title == ''
-            ? containerGradient(
-                child: Icon(
-                icon,
-                color: Colors.white,
-                size: 40,
-              ))
-            : Icon(icon,
-                color: Color(0xffdd685c),
-                size: 26,
-                textDirection: TextDirection.rtl),
+        icon: Image.asset('assets/images/$img/invalid_name.png',
+            width: img != 'camera' ? 25 : 45),
+        activeIcon: Image.asset(
+          'assets/images/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
+          width: img != 'camera' ? 25 : 45
+        ),
         title: Text(
           title,
           style: TextStyle(

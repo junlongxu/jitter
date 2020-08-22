@@ -39,6 +39,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             GestureDetector(
                 onTap: () {
@@ -50,8 +51,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                   showState: loveState,
                   child: _loveContainer(
                       !loveState
-                          ? 'assets/images/love.png'
-                          : 'assets/images/love_active.png',
+                          ? 'assets/images/love/invalid_name.png'
+                          : 'assets/images/love_active/invalid_name.png',
                       '311.1w'),
                 )),
             FloatingActionButton(
@@ -59,14 +60,14 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               elevation: 0.0,
               highlightElevation: 0.01,
               backgroundColor: Colors.transparent,
-              child: _loveContainer('assets/images/information.png', '311.1w'),
+              child: _loveContainer('assets/images/information/invalid_name.png', '311.1w'),
             ),
             FloatingActionButton(
                 onPressed: _shareBottomBox,
                 elevation: 0.0,
                 highlightElevation: 0.01,
                 backgroundColor: Colors.transparent,
-                child: _loveContainer('assets/images/share.png', '分享')),
+                child: _loveContainer('assets/images/share/invalid_name.png', '分享')),
           ],
         )
       ],
@@ -191,6 +192,15 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
         child: Column(
           children: <Widget>[
             Container(
+              margin: EdgeInsets.only(bottom: 4),
+              height: 4,
+              width: 32,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            Container(
               height: 30,
               child: Text(
                 '328464条评论',
@@ -212,136 +222,96 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
     if (item == null) return null;
     bool shareLoveState = false;
     bool loadMoreReplies = false; // 加载更多
-    bool isArrow = false;
-    return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.network(
-          item['headImg'],
-          width: 40,
-          height: 40,
-        ),
-      ),
-      title: Text(item['name']),
-      subtitle: Text(item['content']),
-      // onTap: () {
-      //   _switchReply(item['name']);
-      // },
-    );
+    
     return Container(
-      padding: EdgeInsets.only(left: !isChild ? 0 : 40, top: 4),
-      child: Column(
-        children: <Widget>[
-          Wrap(
-            textDirection: TextDirection.ltr,
-            alignment: WrapAlignment.spaceBetween,
+        constraints: BoxConstraints(minHeight: 80),
+        child: ListTile(
+          contentPadding: EdgeInsets.all(0),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(!isChild ? 20 : 15),
+            child: Image.network(
+              item.headImg,
+              width: !isChild ? 40 : 30,
+              height: !isChild ? 40 : 30,
+            ),
+          ),
+          // isThreeLine: true,
+          // enabled: true,
+          // isThreeLine: true,
+          // dense: true,
+          title: Text(
+            item.nickname,
+            style: skyGraySmallTextStyle,
+          ),
+          subtitle: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: Image.network(
-                    item.headImg,
-                    width: !isChild ? 40 : 30,
-                    height: !isChild ? 40 : 30,
-                  )),
-              Expanded(
-                child: Wrap(
-                  children: <Widget>[
-                    Container(
-                      width: !isChild ? 290 : 250,
-                      padding: EdgeInsets.only(left: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            item.nickname,
-                            style: skyGraySmallTextStyle,
-                          ),
-                          RichText(
-                              text: TextSpan(children: [
-                            TextSpan(
-                                text:
-                                    '穿这么短干嘛? 故意引起男人的注意么? 呵呵呵 ${item.content} !',
-                                style: maxTextStyle),
-                            TextSpan(
-                                text: '  ${item.commentDate}',
-                                style: skyGraySmallTextStyle)
-                          ])),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: '起男人的注意么1? 呵呵呵 ${item.content} !',
+                      style: mediumTextStyle),
+                  TextSpan(
+                      text: '  ${item.commentDate}',
+                      style: skyGraySmallTextStyle)
+                ]),
               ),
-              Container(
-                width: 20, // 防止child为空的时候评论错乱
-                margin: EdgeInsets.only(top: 22, right: 6),
-                // 右侧箭头
-                // child: (comment != null)
-                //     ? GestureDetector(
-                //       onTap: (){
-                //         setState(() {
-                //           isArrow = !isArrow;
-                //         });
-                //       },
-                //       child: Icon(
-                //         isArrow ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
-                //         color: skyGray,
-                //       ),
-                //     )
-                //     : Text(' '),
-              ),
-              Container(
-                width: 30,
-                padding: EdgeInsets.only(top: 6),
-                child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        shareLoveState = !shareLoveState;
-                      });
-                    },
-                    child: AnimatedSwitcherCounterRoute(
-                      showState: shareLoveState,
-                      child: _loveContainer(
-                          !shareLoveState
-                              ? 'assets/images/love_white.png'
-                              : 'assets/images/love_active.png',
-                          '1.6w'),
-                    )),
-              )
+              // 子评论
+              (item?.child != null &&
+                      item?.child?.length != 0 &&
+                      item.child != [])
+                  ? Column(
+                      children: <Widget>[
+                        ...item.child.map((childItem) =>
+                            _eachComment(item: childItem, isChild: true)),
+                        GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                loadMoreReplies = !loadMoreReplies;
+                              });
+                            },
+                            child: !loadMoreReplies
+                                ? Row(
+                                    children: <Widget>[
+                                      Text(
+                                        '展开更多回复',
+                                        style: skyGraySmallTextStyle,
+                                      ),
+                                      Icon(Icons.arrow_drop_down,
+                                          color: skyGray)
+                                    ],
+                                  )
+                                : LoadingWidget(
+                                    loadingType: LoadingType.ballSpin,
+                                    size: 15.0,
+                                  ))
+                      ],
+                    )
+                  : emptyWidget,
             ],
           ),
-          (item?.child != null && item?.child?.length != 0 && item.child != [])
-              ? Column(
-                  children: <Widget>[
-                    ...item.child.map((childItem) =>
-                        _eachComment(item: childItem, isChild: true)),
-                    GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            loadMoreReplies = !loadMoreReplies;
-                          });
-                        },
-                        child: !loadMoreReplies
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    '展开更多回复',
-                                    style: skyGraySmallTextStyle,
-                                  ),
-                                  Icon(Icons.arrow_drop_down, color: skyGray)
-                                ],
-                              )
-                            : LoadingWidget(
-                                loadingType: LoadingType.ballSpin,
-                                size: 15.0,
-                              ))
-                  ],
-                )
-              : emptyWidget,
-        ],
-      ),
-    );
+          trailing: Container(
+            width: 30,
+            child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    shareLoveState = !shareLoveState;
+                  });
+                },
+                child: AnimatedSwitcherCounterRoute(
+                  showState: shareLoveState,
+                  child: _loveContainer(
+                      !shareLoveState
+                          ? 'assets/images/love_white/invalid_name.png'
+                          : 'assets/images/love_active/invalid_name.png',
+                      '1.6w'),
+                )),
+          ),
+          onTap: () {
+            // _switchReply(item['name']);
+          },
+        ));
   }
 
 //  回复评论输入框
@@ -390,10 +360,11 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   }
 }
 
+// 爱心
 Container _loveContainer(
         [String imageUrl, String description, bool isHideText = false]) =>
     Container(
-      height: 60,
+      // height: 50,
       child: Column(
         children: <Widget>[
           Image.asset(

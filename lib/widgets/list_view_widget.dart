@@ -17,6 +17,9 @@ class _ListViewWidgetState extends State<ListViewWidget> with Base {
         flex: 1,
         // key: ValueKey<double>(widget.itemWidth),
         child: ListView.builder(
+          physics: AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics()
+          ),
             itemCount: widget?.dataList?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return Column(

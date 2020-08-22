@@ -15,27 +15,27 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
     return Column(
       children: <Widget>[
         Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            CircleAvatar(
+                backgroundColor: Colors.transparent,
+                child: Image.network(
+                  widget?.url,
+                  width: 36,
+                  height: 36,
+                )),
             Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 1)),
-              child: CircleAvatar(
-                child: Image.network(widget?.url),
-              ),
-            ),
-            Container(
-              width: 90.0,
-              padding: EdgeInsets.fromLTRB(5, 0, 0, 6),
+              
+              padding: EdgeInsets.only(left: 5,right: 5),
               child: Text(
-                '@色情网',
+                '@色情网1111',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Color(0xfffafafa), fontSize: 18),
+                style: TextStyle(color: Color(0xfffafafa), fontSize: 14),
               ),
             ),
             Container(
-                padding: EdgeInsets.only(bottom: 4),
+                // padding: EdgeInsets.only(bottom: 4),
                 alignment: Alignment.center,
                 child: GestureDetector(
                     onTap: () {
@@ -45,7 +45,7 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
                     },
                     child: AnimatedSwitcherCounterRoute(
                       showState: loveState,
-                       alignment: Alignment.centerLeft,
+                      alignment: Alignment.centerLeft,
                       child: containerGradient(
                         width: loveState ? 36 : 18,
                         height: 18,
@@ -72,7 +72,7 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
               child: Text('这位小姐姐太厉害了, 我完全不是她的对手耶 !',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 16, color: Colors.white)),
+                  style: TextStyle(fontSize: 14, color: Colors.white)),
             )
           ],
         )
