@@ -15,7 +15,7 @@ class _MyPageState extends State<MyPage> with Base {
   Widget build(BuildContext context) {
     return Container(
       color: themeColor,
-      padding: EdgeInsets.fromLTRB(boundarySize, 20, boundarySize, 20),
+      padding: EdgeInsets.fromLTRB(boundarySize, 20, boundarySize, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[UserTopMsg(), FoolowFansLike(), WorksLikes()],

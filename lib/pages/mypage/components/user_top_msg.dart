@@ -19,7 +19,7 @@ class _UserTopMsgState extends State<UserTopMsg> with Base {
           Row(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 5),
+                margin: EdgeInsets.only(right: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.network(
