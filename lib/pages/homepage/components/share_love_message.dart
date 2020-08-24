@@ -93,7 +93,6 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       child: child,
     );
   }
-  // _showModalBottomSheet()
   // 底部弹框
    Future _showModalBottomSheet() {
     var data = {
@@ -202,9 +201,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       "navigateLastPage": 1
     };
     Utf8Decoder utf8decoder = Utf8Decoder();
-    // var data1 =json.decode(data.list);
     RootShare shareData = RootShare.fromJson(data);
-    // BottomsheetUtil.sheet(context: context, chi );
     CustomBottomSheet.showModalBottomSheet(
         backgroundColor: Colors.white.withOpacity(0),
         context: context,

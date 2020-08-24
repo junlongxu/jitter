@@ -16,13 +16,19 @@ class TabNavigator extends StatefulWidget {
 class _TabNavigatorState extends State<TabNavigator> with Base {
   int _currentIndex = 0;
   final PageController _controller = PageController(initialPage: 0);
-  final List pages = [
+  final List<dynamic> pages = [
     HomePage(),
     CameraPage(),
     CommunityPage(),
-    MyPage(),
-    TaskPage()
+    TaskPage(),
+    MyPage()
   ];
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +61,8 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
         icon: Image.asset('assets/images/$img/invalid_name.png',
             width: img != 'camera' ? 25 : 45),
         activeIcon: Image.asset(
-          'assets/images/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
-          width: img != 'camera' ? 25 : 45
-        ),
+            'assets/images/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
+            width: img != 'camera' ? 25 : 45),
         title: Text(
           title,
           style: TextStyle(
