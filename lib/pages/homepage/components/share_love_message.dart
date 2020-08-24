@@ -58,8 +58,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                 showState: loveState,
                 child: _loveContainer(
                     !loveState
-                        ? 'assets/images/love/invalid_name.png'
-                        : 'assets/images/love_active/invalid_name.png',
+                        ? 'assets/images/home/love/invalid_name.png'
+                        : 'assets/images/home/love_active/invalid_name.png',
                     '311.1w'),
               )),
         ),
@@ -70,7 +70,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             highlightElevation: 0.01,
             backgroundColor: Colors.transparent,
             child: _loveContainer(
-                'assets/images/information/invalid_name.png', '311.1w'),
+                'assets/images/home/information/invalid_name.png', '311.1w'),
           ),
         ),
         _itemRightIconHeight(
@@ -80,7 +80,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               highlightElevation: 0.01,
               backgroundColor: Colors.transparent,
               child:
-                  _loveContainer('assets/images/share/invalid_name.png', '分享')),
+                  _loveContainer('assets/images/home/share/invalid_name.png', '分享')),
         )
       ],
     );
@@ -296,8 +296,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               showState: shareLoveState,
               child: _loveContainer(
                   !shareLoveState
-                      ? 'assets/images/love_white/invalid_name.png'
-                      : 'assets/images/love_active/invalid_name.png',
+                      ? 'assets/images/home/love_white/invalid_name.png'
+                      : 'assets/images/home/love_active/invalid_name.png',
                   '59'),
             ));
       },

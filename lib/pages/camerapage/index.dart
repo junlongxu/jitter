@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/pages/login/index.dart';
 
 class CameraPage extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('CameraPage'),
+      child: LoginPage(),
     );
   }
 }

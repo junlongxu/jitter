@@ -54,113 +54,121 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/images/home/invalid_name.png
-      - assets/images/home/drawable-hdpi/invalid_name.png
-      - assets/images/home/drawable-mdpi/invalid_name.png
-      - assets/images/home/drawable-xhdpi/invalid_name.png
-      - assets/images/home/drawable-xxhdpi/invalid_name.png
-      - assets/images/home/drawable-xxxhdpi/invalid_name.png
+    # ------------首页
+      - assets/images/home/home/invalid_name.png
+      - assets/images/home/home/drawable-hdpi/invalid_name.png
+      - assets/images/home/home/drawable-mdpi/invalid_name.png
+      - assets/images/home/home/drawable-xhdpi/invalid_name.png
+      - assets/images/home/home/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/home/drawable-xxxhdpi/invalid_name.png
 
-      - assets/images/home_active/invalid_name.png
-      - assets/images/home_active/drawable-hdpi/invalid_name.png
-      - assets/images/home_active/drawable-mdpi/invalid_name.png
-      - assets/images/home_active/drawable-xhdpi/invalid_name.png
-      - assets/images/home_active/drawable-xxhdpi/invalid_name.png
-      - assets/images/home_active/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/home_active/invalid_name.png
+      - assets/images/home/home_active/drawable-hdpi/invalid_name.png
+      - assets/images/home/home_active/drawable-mdpi/invalid_name.png
+      - assets/images/home/home_active/drawable-xhdpi/invalid_name.png
+      - assets/images/home/home_active/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/home_active/drawable-xxxhdpi/invalid_name.png
 
       # 社区
-      - assets/images/community/invalid_name.png
-      - assets/images/community/drawable-hdpi/invalid_name.png
-      - assets/images/community/drawable-mdpi/invalid_name.png
-      - assets/images/community/drawable-xhdpi/invalid_name.png
-      - assets/images/community/drawable-xxhdpi/invalid_name.png
-      - assets/images/community/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/community/invalid_name.png
+      - assets/images/home/community/drawable-hdpi/invalid_name.png
+      - assets/images/home/community/drawable-mdpi/invalid_name.png
+      - assets/images/home/community/drawable-xhdpi/invalid_name.png
+      - assets/images/home/community/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/community/drawable-xxxhdpi/invalid_name.png
 
 
-      - assets/images/community_active/invalid_name.png
-      - assets/images/community_active/drawable-hdpi/invalid_name.png
-      - assets/images/community_active/drawable-mdpi/invalid_name.png
-      - assets/images/community_active/drawable-xhdpi/invalid_name.png
-      - assets/images/community_active/drawable-xxhdpi/invalid_name.png
-      - assets/images/community_active/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/community_active/invalid_name.png
+      - assets/images/home/community_active/drawable-hdpi/invalid_name.png
+      - assets/images/home/community_active/drawable-mdpi/invalid_name.png
+      - assets/images/home/community_active/drawable-xhdpi/invalid_name.png
+      - assets/images/home/community_active/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/community_active/drawable-xxxhdpi/invalid_name.png
       # 相机
-      - assets/images/camera/invalid_name.png
-      - assets/images/camera/drawable-hdpi/invalid_name.png
-      - assets/images/camera/drawable-mdpi/invalid_name.png
-      - assets/images/camera/drawable-xhdpi/invalid_name.png
-      - assets/images/camera/drawable-xxhdpi/invalid_name.png
-      - assets/images/camera/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/camera/invalid_name.png
+      - assets/images/home/camera/drawable-hdpi/invalid_name.png
+      - assets/images/home/camera/drawable-mdpi/invalid_name.png
+      - assets/images/home/camera/drawable-xhdpi/invalid_name.png
+      - assets/images/home/camera/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/camera/drawable-xxxhdpi/invalid_name.png
 
       # 任务
-      - assets/images/task/invalid_name.png
-      - assets/images/task/drawable-hdpi/invalid_name.png
-      - assets/images/task/drawable-mdpi/invalid_name.png
-      - assets/images/task/drawable-xhdpi/invalid_name.png
-      - assets/images/task/drawable-xxhdpi/invalid_name.png
-      - assets/images/task/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/task/invalid_name.png
+      - assets/images/home/task/drawable-hdpi/invalid_name.png
+      - assets/images/home/task/drawable-mdpi/invalid_name.png
+      - assets/images/home/task/drawable-xhdpi/invalid_name.png
+      - assets/images/home/task/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/task/drawable-xxxhdpi/invalid_name.png
 
-      - assets/images/task_active/invalid_name.png
-      - assets/images/task_active/drawable-hdpi/invalid_name.png
-      - assets/images/task_active/drawable-mdpi/invalid_name.png
-      - assets/images/task_active/drawable-xhdpi/invalid_name.png
-      - assets/images/task_active/drawable-xxhdpi/invalid_name.png
-      - assets/images/task_active/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/task_active/invalid_name.png
+      - assets/images/home/task_active/drawable-hdpi/invalid_name.png
+      - assets/images/home/task_active/drawable-mdpi/invalid_name.png
+      - assets/images/home/task_active/drawable-xhdpi/invalid_name.png
+      - assets/images/home/task_active/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/task_active/drawable-xxxhdpi/invalid_name.png
 
       # 我的
-      - assets/images/my/invalid_name.png
-      - assets/images/my/drawable-hdpi/invalid_name.png
-      - assets/images/my/drawable-mdpi/invalid_name.png
-      - assets/images/my/drawable-xhdpi/invalid_name.png
-      - assets/images/my/drawable-xxhdpi/invalid_name.png
-      - assets/images/my/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/my/invalid_name.png
+      - assets/images/home/my/drawable-hdpi/invalid_name.png
+      - assets/images/home/my/drawable-mdpi/invalid_name.png
+      - assets/images/home/my/drawable-xhdpi/invalid_name.png
+      - assets/images/home/my/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/my/drawable-xxxhdpi/invalid_name.png
 
-      - assets/images/my_active/invalid_name.png
-      - assets/images/my_active/drawable-hdpi/invalid_name.png
-      - assets/images/my_active/drawable-mdpi/invalid_name.png
-      - assets/images/my_active/drawable-xhdpi/invalid_name.png
-      - assets/images/my_active/drawable-xxhdpi/invalid_name.png
-      - assets/images/my_active/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/my_active/invalid_name.png
+      - assets/images/home/my_active/drawable-hdpi/invalid_name.png
+      - assets/images/home/my_active/drawable-mdpi/invalid_name.png
+      - assets/images/home/my_active/drawable-xhdpi/invalid_name.png
+      - assets/images/home/my_active/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/my_active/drawable-xxxhdpi/invalid_name.png
 
       # 爱心
-      - assets/images/love/invalid_name.png
-      - assets/images/love/drawable-hdpi/invalid_name.png
-      - assets/images/love/drawable-mdpi/invalid_name.png
-      - assets/images/love/drawable-xhdpi/invalid_name.png
-      - assets/images/love/drawable-xxhdpi/invalid_name.png
-      - assets/images/love/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/love/invalid_name.png
+      - assets/images/home/love/drawable-hdpi/invalid_name.png
+      - assets/images/home/love/drawable-mdpi/invalid_name.png
+      - assets/images/home/love/drawable-xhdpi/invalid_name.png
+      - assets/images/home/love/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/love/drawable-xxxhdpi/invalid_name.png
 
-      - assets/images/love_active/invalid_name.png
-      - assets/images/love_active/drawable-hdpi/invalid_name.png
-      - assets/images/love_active/drawable-mdpi/invalid_name.png
-      - assets/images/love_active/drawable-xhdpi/invalid_name.png
-      - assets/images/love_active/drawable-xxhdpi/invalid_name.png
-      - assets/images/love_active/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/love_active/invalid_name.png
+      - assets/images/home/love_active/drawable-hdpi/invalid_name.png
+      - assets/images/home/love_active/drawable-mdpi/invalid_name.png
+      - assets/images/home/love_active/drawable-xhdpi/invalid_name.png
+      - assets/images/home/love_active/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/love_active/drawable-xxxhdpi/invalid_name.png
 
-      - assets/images/love_white/invalid_name.png
-      - assets/images/love_white/drawable-hdpi/invalid_name.png
-      - assets/images/love_white/drawable-mdpi/invalid_name.png
-      - assets/images/love_white/drawable-xhdpi/invalid_name.png
-      - assets/images/love_white/drawable-xxhdpi/invalid_name.png
-      - assets/images/love_white/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/love_white/invalid_name.png
+      - assets/images/home/love_white/drawable-hdpi/invalid_name.png
+      - assets/images/home/love_white/drawable-mdpi/invalid_name.png
+      - assets/images/home/love_white/drawable-xhdpi/invalid_name.png
+      - assets/images/home/love_white/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/love_white/drawable-xxxhdpi/invalid_name.png
 
       # 消息
-      - assets/images/information/invalid_name.png
-      - assets/images/information/drawable-hdpi/invalid_name.png
-      - assets/images/information/drawable-mdpi/invalid_name.png
-      - assets/images/information/drawable-xhdpi/invalid_name.png
-      - assets/images/information/drawable-xxhdpi/invalid_name.png
-      - assets/images/information/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/information/invalid_name.png
+      - assets/images/home/information/drawable-hdpi/invalid_name.png
+      - assets/images/home/information/drawable-mdpi/invalid_name.png
+      - assets/images/home/information/drawable-xhdpi/invalid_name.png
+      - assets/images/home/information/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/information/drawable-xxxhdpi/invalid_name.png
 
 
     # 分享
-      - assets/images/share/invalid_name.png
-      - assets/images/share/drawable-hdpi/invalid_name.png
-      - assets/images/share/drawable-mdpi/invalid_name.png
-      - assets/images/share/drawable-xhdpi/invalid_name.png
-      - assets/images/share/drawable-xxhdpi/invalid_name.png
-      - assets/images/share/drawable-xxxhdpi/invalid_name.png
+      - assets/images/home/share/invalid_name.png
+      - assets/images/home/share/drawable-hdpi/invalid_name.png
+      - assets/images/home/share/drawable-mdpi/invalid_name.png
+      - assets/images/home/share/drawable-xhdpi/invalid_name.png
+      - assets/images/home/share/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/share/drawable-xxxhdpi/invalid_name.png
       
 
+    # ---------------登录页面
+      - assets/images/login/logo/invalid_name.png
+      - assets/images/login/logo/drawable-hdpi/invalid_name.png
+      - assets/images/login/logo/drawable-mdpi/invalid_name.png
+      - assets/images/login/logo/drawable-xhdpi/invalid_name.png
+      - assets/images/login/logo/drawable-xxhdpi/invalid_name.png
+      - assets/images/login/logo/drawable-xxxhdpi/invalid_name.png
   #   - assets/svgs/home.svg
   #   - assets/svgs/home_active.svg
   #   - assets/svgs/community.svg

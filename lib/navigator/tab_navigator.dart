@@ -58,10 +58,10 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
 
   BottomNavigationBarItem _svgWidget(String img, String title, int index) {
     return BottomNavigationBarItem(
-        icon: Image.asset('assets/images/$img/invalid_name.png',
+        icon: Image.asset('assets/images/home/$img/invalid_name.png',
             width: img != 'camera' ? 25 : 45),
         activeIcon: Image.asset(
-            'assets/images/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
+            'assets/images/home/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
             width: img != 'camera' ? 25 : 45),
         title: Text(
           title,
