@@ -3,15 +3,15 @@ import 'package:jitter/model/share.dart';
 import 'package:flutter/material.dart';
 import 'package:jitter/pages/homepage/components/bottom.dart';
 import 'package:jitter/pages/mypage/index.dart';
+import 'package:jitter/util/BottomsheetUtil.dart';
 import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 import 'dart:convert';
 import 'package:jitter/widgets/loading_widget.dart';
 
 import 'package:jitter/widgets/list_view_widget.dart';
-
-/// 单独修改了bottomSheet组件的高度
 import 'package:jitter/dart/bottomSheet.dart' as CustomBottomSheet;
+
 
 class ShareLoveMessage extends StatefulWidget {
   @override
@@ -21,13 +21,17 @@ class ShareLoveMessage extends StatefulWidget {
 class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   bool loveState = false;
   bool shareLoveState = false;
+  String inputValue = '';
+  var backfillUserData;
   // bool shareState = false;
   String replyShareValue = ''; // 回复评论
   TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
-    _controller.text = '说点什么吧 !';
+    _controller.text = backfillUserData?.nickname != ''
+        ? '回复${backfillUserData?.nickname}'
+        : '说点什么吧 !';
 
     super.initState();
   }
@@ -89,9 +93,9 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       child: child,
     );
   }
-
+  // _showModalBottomSheet()
   // 底部弹框
-  Future _showModalBottomSheet() {
+   Future _showModalBottomSheet() {
     var data = {
       "total": "3",
       "list": [
@@ -200,6 +204,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
     Utf8Decoder utf8decoder = Utf8Decoder();
     // var data1 =json.decode(data.list);
     RootShare shareData = RootShare.fromJson(data);
+    // BottomsheetUtil.sheet(context: context, chi );
     CustomBottomSheet.showModalBottomSheet(
         backgroundColor: Colors.white.withOpacity(0),
         context: context,
@@ -228,7 +233,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                       style: mediumTextStyle,
                     ),
                   ),
-                  ListViewWidget(dataList: shareData.list, callback: _item)
+                  ListViewWidget(dataList: shareData.list, callback: _item),
+                  _input()
                 ],
               ),
             ));
@@ -249,25 +255,36 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       ),
     );
     // 名字和内容
-    var info = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          item.nickname,
-          style: skyGraySmallTextStyle,
-        ),
-        RichText(
-          text: TextSpan(children: [
-            TextSpan(
-                text:
-                    '起男人的多阿萨达算哒算123阿斯萨达萨达撒阿斯顿撒电费第三方sadasa哒呵呵 ${item.content} !',
-                style: mediumTextStyle),
-            TextSpan(
-                text: '  ${item.commentDate}', style: skyGraySmallTextStyle)
-          ]),
-        )
-      ],
-    );
+    var info = StatefulBuilder(
+        builder: (context, state) => GestureDetector(
+              onTap: () {
+                state(() {
+                  backfillUserData = item;
+                  //  _checkedBottomSheet();
+                  _showModalBottomSheet();
+                });
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    item.nickname,
+                    style: skyGraySmallTextStyle,
+                  ),
+                  RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text:
+                              '起男人的多阿萨达算哒算123阿斯萨达萨达撒阿斯顿撒电费第三方sadasa哒呵呵 ${item.content} !',
+                          style: mediumTextStyle),
+                      TextSpan(
+                          text: '  ${item.commentDate}',
+                          style: skyGraySmallTextStyle)
+                    ]),
+                  ),
+                ],
+              ),
+            ));
     // 右侧心心
     var rightIcon = StatefulBuilder(
       builder: (context, state) {
@@ -275,6 +292,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             onTap: () {
               state(() {
                 shareLoveState = !shareLoveState;
+               
               });
             },
             child: AnimatedSwitcherCounterRoute(
@@ -307,7 +325,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             ],
           )
         : emptyWidget;
-
+    // 集合评论
     var completeCommentItem = Row(
       crossAxisAlignment: CrossAxisAlignment.start, // 解决图片基线中间对其的情况
       children: <Widget>[
@@ -323,11 +341,24 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             left: !isChild ? 10 : 50, right: !isChild ? 10 : 0, top: 8),
         // EdgeInsets.symmetric(horizontal: !isChild ? 10 : 0, vertical: 6),
         child: Column(
-          children: <Widget>[
-            completeCommentItem,
-            itemChild,
-          ],
+          children: <Widget>[completeCommentItem, itemChild],
         ));
+  }
+
+  // 回复选项弹窗
+  // _checkedBottomSheet() {
+  //   return CupertinoActionSheet(
+      
+  //   );
+  // }
+
+  _input() {
+    return TextField(
+        controller: _controller,
+        onChanged: (value) {},
+        onTap: () {
+          // var padding = MediaQuery.of(context).
+        });
   }
 
   // 评论loading加载更多回复
@@ -363,7 +394,6 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
         replyShareValue = value;
       },
       style: maxTextStyle,
-      // focusNode: ,
       decoration: InputDecoration(
         hintText: "请输入",
         suffix: replyShareValue.length > 0
@@ -402,7 +432,6 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
 
 // 爱心
 Container _loveContainer([String imageUrl, String description]) => Container(
-      // width: 50,
       height: 50,
       child: Column(
         children: <Widget>[
