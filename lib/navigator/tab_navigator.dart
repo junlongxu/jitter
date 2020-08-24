@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jitter/pages/camerapage/index.dart';
 import 'package:jitter/pages/communitypage/index.dart';
 import 'package:jitter/pages/homepage/index.dart';
+import 'package:jitter/pages/login/index.dart';
 import 'package:jitter/pages/mypage/index.dart';
 import 'package:jitter/pages/taskpage/index.dart';
 
@@ -44,7 +45,17 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
             onTap: (index) {
               _controller.jumpToPage(index);
               setState(() {
-                _currentIndex = index;
+                if (_currentIndex == 0) {
+                  _currentIndex = index;
+                }
+                if (_currentIndex != 0) {
+                  showModalBottomSheet(
+                      useRootNavigator: true,
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext sheetContext) => LoginPage());
+                  _currentIndex = index;
+                }
               });
             },
             items: [
@@ -58,23 +69,23 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
 
   BottomNavigationBarItem _svgWidget(String img, String title, int index) {
     return BottomNavigationBarItem(
-        icon: Image.asset('assets/images/home/$img/invalid_name.png',
-            width: img != 'camera' ? 25 : 45),
-        activeIcon: Image.asset(
-            'assets/images/home/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
-            width: img != 'camera' ? 25 : 45),
-        title: Text(
-          title,
-          style: TextStyle(
-              fontSize: 12,
-              foreground: _currentIndex != index
-                  ? (Paint()
-                    ..shader =
-                        textGradient(Color(0xff9c9ea3), Color(0xff9c9ea3)))
-                  : (Paint()
-                    ..shader =
-                        textGradient(Color(0xfff55363), Color(0xfff77d61))),
-              decoration: TextDecoration.none),
-        ));
+      icon: Image.asset('assets/images/home/$img/invalid_name.png',
+          width: img != 'camera' ? 25 : 45),
+      activeIcon: Image.asset(
+          'assets/images/home/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
+          width: img != 'camera' ? 25 : 45),
+      title: Text(
+        title,
+        style: TextStyle(
+            fontSize: 12,
+            foreground: _currentIndex != index
+                ? (Paint()
+                  ..shader = textGradient(Color(0xff9c9ea3), Color(0xff9c9ea3)))
+                : (Paint()
+                  ..shader =
+                      textGradient(Color(0xfff55363), Color(0xfff77d61))),
+            decoration: TextDecoration.none),
+      ),
+    );
   }
 }

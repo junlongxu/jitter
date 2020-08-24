@@ -10,7 +10,7 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: LoginPage(),
+      child: Text('CameraPage'),
     );
   }
 }

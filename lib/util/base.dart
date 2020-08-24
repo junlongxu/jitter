@@ -6,16 +6,16 @@ abstract class Base {
   final double boundarySize = 10.0;
 
   final TextStyle skyGraySmallTextStyle =
-      TextStyle(fontSize: 12, color: Color(0xff727e99));
+      TextStyle(fontSize: 12, color: Color(0xff727e99), fontWeight: FontWeight.w500);
   
   final TextStyle smallTextStyle =
-      TextStyle(fontSize: 12, color: Color(0xffdedfe1));
+      TextStyle(fontSize: 12, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
   final TextStyle mediumTextStyle =
-      TextStyle(fontSize: 14, color: Color(0xffdedfe1));
+      TextStyle(fontSize: 14, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
   final TextStyle largeTextStyle =
-      TextStyle(fontSize: 16, color: Color(0xffdedfe1));
+      TextStyle(fontSize: 16, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
       final TextStyle maxTextStyle =
-      TextStyle(fontSize: 18, color: Color(0xffdedfe1));
+      TextStyle(fontSize: 18, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
   Shader textGradient(Color beginColor, Color endColor) => LinearGradient(
           colors: [beginColor, endColor],
           begin: Alignment.bottomLeft,
@@ -28,6 +28,7 @@ abstract class Base {
     double width,
     @required double height,
     EdgeInsets padding,
+    EdgeInsets margin,
     @required Widget child,
     bool isCircular = false,
   }) =>
@@ -35,6 +36,7 @@ abstract class Base {
         height: height,
         width: width,
         padding: padding,
+        margin: margin,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
@@ -42,7 +44,7 @@ abstract class Base {
             Color(endColor ?? 0xfff78361)
           ], begin: Alignment.bottomLeft, end: Alignment.topRight),
           borderRadius:
-              BorderRadius.circular(isCircular ? (width ?? height / 2) : 20.0),
+              BorderRadius.circular(isCircular ? (width ?? height / 2) : 25.0),
         ),
         child: child,
       );
