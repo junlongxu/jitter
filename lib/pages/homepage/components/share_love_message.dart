@@ -12,7 +12,6 @@ import 'package:jitter/widgets/loading_widget.dart';
 import 'package:jitter/widgets/list_view_widget.dart';
 import 'package:jitter/dart/bottomSheet.dart' as CustomBottomSheet;
 
-
 class ShareLoveMessage extends StatefulWidget {
   @override
   _ShareLoveMessageState createState() => _ShareLoveMessageState();
@@ -79,8 +78,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               elevation: 0.0,
               highlightElevation: 0.01,
               backgroundColor: Colors.transparent,
-              child:
-                  _loveContainer('assets/images/home/share/invalid_name.png', '分享')),
+              child: _loveContainer(
+                  'assets/images/home/share/invalid_name.png', '分享')),
         )
       ],
     );
@@ -93,8 +92,9 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
       child: child,
     );
   }
+
   // 底部弹框
-   Future _showModalBottomSheet() {
+  Future _showModalBottomSheet() {
     var data = {
       "total": "3",
       "list": [
@@ -289,7 +289,6 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             onTap: () {
               state(() {
                 shareLoveState = !shareLoveState;
-               
               });
             },
             child: AnimatedSwitcherCounterRoute(
@@ -345,7 +344,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   // 回复选项弹窗
   // _checkedBottomSheet() {
   //   return CupertinoActionSheet(
-      
+
   //   );
   // }
 

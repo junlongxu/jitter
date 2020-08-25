@@ -15,7 +15,7 @@ class EachComment extends StatelessWidget with Base {
   TextEditingController _controller = TextEditingController();
 
   // 底部弹框
-  static Future showModalBottomSheet(BuildContext context) {
+  Future showModalBottomSheet(BuildContext context) {
     var data = {
       "total": "3",
       "list": [

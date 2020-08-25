@@ -35,7 +35,7 @@ dependencies:
   shared_preferences: ^0.5.8
   # 瀑布流
   flutter_staggered_grid_view: ^0.3.2
-
+  dio: ^3.0.10
   
 dev_dependencies:
   flutter_test:
@@ -169,6 +169,8 @@ flutter:
       - assets/images/login/logo/drawable-xhdpi/invalid_name.png
       - assets/images/login/logo/drawable-xxhdpi/invalid_name.png
       - assets/images/login/logo/drawable-xxxhdpi/invalid_name.png
+      # 背景
+      - assets/images/login/background/invalid_name.png
   #   - assets/svgs/home.svg
   #   - assets/svgs/home_active.svg
   #   - assets/svgs/community.svg

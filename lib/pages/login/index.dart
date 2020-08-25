@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/api/login.dart';
 import 'package:jitter/util/base.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,8 +17,8 @@ class _LoginPageState extends State<LoginPage> with Base {
       padding: EdgeInsets.all(boundarySize),
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: NetworkImage(
-                'http://chuantu.xyz/t6/740/1598268016x-1566661083.png'),
+            image:
+                AssetImage('assets/images/login/background/invalid_name.png'),
             fit: BoxFit.cover),
       ),
       child: new SingleChildScrollView(
@@ -48,52 +49,7 @@ class _LoginPageState extends State<LoginPage> with Base {
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 width: MediaQuery.of(context).size.width -
                     (20 + 40), // 两侧padding和右侧元素宽度
-                child: FormTestRoute()
-                //  Column(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: <Widget>[
-                //     Text(
-                //       '登录',
-                //       style: largeTextStyle,
-                //     ),
-                //     TextField(
-                //       autofocus: true,
-                //       decoration: InputDecoration(
-                //           contentPadding:
-                //               const EdgeInsets.symmetric(vertical: 10.0),
-                //           labelText: "用户名",
-                //           // hintText: "用户名或邮箱",
-                //           prefixIcon: Icon(Icons.person)),
-                //     ),
-                //     TextField(
-                //       decoration: InputDecoration(
-                //           labelText: "密码",
-                //           // hintText: "您的登录密码",
-                //           prefixIcon: Icon(Icons.lock)),
-                //       obscureText: true,
-                //     ),
-
-                //     Row(
-                //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //       children: <Widget>[Text('记住密码'), Text('忘记密码')],
-                //     ),
-                //     containerGradient(
-                //         margin: EdgeInsets.symmetric(horizontal: 20),
-                //         // MaterialButton FlatButton
-                //         child: MaterialButton(
-                //           minWidth: double.infinity,
-                //           height: 45,
-                //           focusColor: Colors.white.withOpacity(0),
-                //           color: Colors.white.withOpacity(0),
-                //           child: Text(
-                //             "登  录",
-                //             style: smallTextStyle,
-                //           ),
-                //           onPressed: () {},
-                //         )),
-                //   ],
-                // ),
-                ),
+                child: FormTestRoute()),
             Positioned(
               right: 10,
               child: Container(
@@ -121,6 +77,14 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
   TextEditingController _unameController = new TextEditingController();
   TextEditingController _pwdController = new TextEditingController();
   GlobalKey _formKey = new GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _unameController.text = '13254658795';
+    _pwdController.text = '111111';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -185,6 +149,12 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
                       // 通过后再提交数据。
                       if ((_formKey.currentState as FormState).validate()) {
                         //验证通过提交数据
+                        login(
+                                tel: _unameController.text,
+                                smscode: _pwdController.text)
+                            .then((res) {
+                              
+                            });
                       }
                     },
                     child: Container(
