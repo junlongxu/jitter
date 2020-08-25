@@ -6,7 +6,7 @@ import 'package:jitter/util/token.dart';
 
 class BaseUrl {
   // 配置默认请求地址
-  static const String url = 'http://172.24.135.204:8011/app/';
+  static const String url = 'http://172.24.135.25:8011/app/';
 }
 
 Future DioHttp(

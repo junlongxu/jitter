@@ -8,8 +8,12 @@ class Token {
 
   static getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var aaa = prefs.getString('token').toString();
-    return null;
+    var token = prefs.getString('token');
+    if (token != null && token.isNotEmpty) {
+      return token;
+    } else {
+      return null;
+    }
   }
 
   static removeToken() async {

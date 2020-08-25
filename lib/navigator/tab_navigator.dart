@@ -46,20 +46,20 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
               setState(() {
-                if (index == 0 || Token.getToken() != null) {
+                if (index == 0) {
                   _currentIndex = index;
                   _controller.jumpToPage(index);
                 }
-                // if (Token.getToken() == null && index != 0 ) {
-
-                //   showModalBottomSheet(
-                //       useRootNavigator: true,
-                //       context: context,
-                //       isScrollControlled: true,
-                //       builder: (BuildContext sheetContext) =>
-                //           LoginPage(currentIndex: _currentIndex, index: index));
-                // } 
-                // Token.removeToken();
+                // if (index != 0 && Token.getToken() == null) {
+                if (index != 0) {
+                  showModalBottomSheet(
+                      useRootNavigator: true,
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext sheetContext) =>
+                          LoginPage(currentIndex: _currentIndex, index: index));
+                }
+                Token.removeToken();
               });
             },
             items: [
