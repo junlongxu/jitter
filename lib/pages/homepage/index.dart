@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage>
                 width: 300,
                 child: Stack(
                   children: <Widget>[
-                    // Player(url: list[index]),
+                    Player(url: list[index]),
                     HomePosition(
                       top: MediaQuery.of(context).size.height * 0.7,
                       left: 10,

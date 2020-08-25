@@ -8,6 +8,7 @@ import 'package:jitter/pages/taskpage/index.dart';
 
 import 'package:jitter/util/base.dart';
 import 'package:jitter/util/custom_icons.dart';
+import 'package:jitter/util/token.dart';
 
 class TabNavigator extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class TabNavigator extends StatefulWidget {
 
 class _TabNavigatorState extends State<TabNavigator> with Base {
   int _currentIndex = 0;
+  bool isHome = true;
   final PageController _controller = PageController(initialPage: 0);
   final List<dynamic> pages = [
     HomePage(),
@@ -43,19 +45,21 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
-              _controller.jumpToPage(index);
               setState(() {
-                if (_currentIndex == 0) {
+                if (index == 0 || Token.getToken() != null) {
                   _currentIndex = index;
+                  _controller.jumpToPage(index);
                 }
-                if (_currentIndex != 0) {
-                  showModalBottomSheet(
-                      useRootNavigator: true,
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (BuildContext sheetContext) => LoginPage());
-                  _currentIndex = index;
-                }
+                // if (Token.getToken() == null && index != 0 ) {
+
+                //   showModalBottomSheet(
+                //       useRootNavigator: true,
+                //       context: context,
+                //       isScrollControlled: true,
+                //       builder: (BuildContext sheetContext) =>
+                //           LoginPage(currentIndex: _currentIndex, index: index));
+                // } 
+                // Token.removeToken();
               });
             },
             items: [

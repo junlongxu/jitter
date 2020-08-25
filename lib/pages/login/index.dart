@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:jitter/api/login.dart';
+import 'package:jitter/model/login.dart';
 import 'package:jitter/util/base.dart';
+import 'package:jitter/util/token.dart';
 
 class LoginPage extends StatefulWidget {
+  int currentIndex;
+  int index;
+  LoginPage({Key key, this.currentIndex, this.index}) : super(key: key);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -49,7 +54,10 @@ class _LoginPageState extends State<LoginPage> with Base {
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 width: MediaQuery.of(context).size.width -
                     (20 + 40), // 两侧padding和右侧元素宽度
-                child: FormTestRoute()),
+                child: FormTestRoute(
+                  currentIndex: widget?.currentIndex,
+                  index: widget?.index,
+                )),
             Positioned(
               right: 10,
               child: Container(
@@ -69,6 +77,9 @@ class _LoginPageState extends State<LoginPage> with Base {
 }
 
 class FormTestRoute extends StatefulWidget {
+  int currentIndex;
+  int index;
+  FormTestRoute({Key key, this.currentIndex, this.index}) : super(key: key);
   @override
   _FormTestRouteState createState() => new _FormTestRouteState();
 }
@@ -81,7 +92,7 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
   @override
   void initState() {
     // TODO: implement initState
-    _unameController.text = '13254658795';
+    _unameController.text = '13254658763';
     _pwdController.text = '111111';
     super.initState();
   }
@@ -149,12 +160,18 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
                       // 通过后再提交数据。
                       if ((_formKey.currentState as FormState).validate()) {
                         //验证通过提交数据
+                        // videos(pageSize: 10,pageNum: 1).then((value) => null);
                         login(
                                 tel: _unameController.text,
                                 smscode: _pwdController.text)
-                            .then((res) {
-                              
-                            });
+                            .then((LoginModel res) {
+                          Token.setToken(res.token);
+                          setState(() {
+                            widget?.currentIndex = widget?.index;
+                          });
+                          Navigator.pop(context);
+                          print(res);
+                        });
                       }
                     },
                     child: Container(
