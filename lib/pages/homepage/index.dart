@@ -78,9 +78,11 @@ class _HomePageState extends State<HomePage>
       'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1969.MP4',
     ];
     return name != '推荐'
-        ? Icon(
-            Icons.ac_unit,
-            color: Colors.white,
+        ? Center(
+            child: Text(
+              '敬请期待 !',
+              style: maxTextStyle,
+            ),
           )
         : PageView.builder(
             itemCount: list?.length ?? 0,
@@ -104,7 +106,6 @@ class _HomePageState extends State<HomePage>
                       left: MediaQuery.of(context).size.width * 0.8,
                       child: ShareLoveMessage(),
                     ),
-                   
                   ],
                 ),
               );

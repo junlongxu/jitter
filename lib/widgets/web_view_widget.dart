@@ -18,12 +18,7 @@ class WebViewWidget extends StatefulWidget {
       this.title,
       this.hideAppBar = false,
       this.backForbid = false,
-      this.bottomAppBar = false}) {
-    if (url != null && url.contains('ctrip.com')) {
-      //fix 携程H5 http://无法打开问题
-      url = url.replaceAll("http://", 'https://');
-    }
-  }
+      this.bottomAppBar = false}) {}
   _WebViewWidgetState createState() => _WebViewWidgetState();
 }
 
@@ -103,19 +98,19 @@ class _WebViewWidgetState extends State<WebViewWidget> {
           _appBar(Color(int.parse('0xff$statusBarColorStr')), backButtonColor),
           Expanded(
               child: WebviewScaffold(
-                  userAgent: 'null',
-                  url: widget.url,
-                  withZoom: true,
-                  withLocalStorage: true,
-                  hidden: true,
-                  initialChild: Container(
-                    color: Colors.white,
-                    child: Center(
-                      child: Text('Waiting...'),
-                    ),
-                  ),
-                  // bottomNavigationBar: TabNavigator(currentIndex: 4)
-            ))
+            userAgent: 'null',
+            url: widget.url,
+            withZoom: true,
+            withLocalStorage: true,
+            // hidden: true,
+            initialChild: Container(
+              color: Colors.white,
+              child: Center(
+                child: Text('Waiting...'),
+              ),
+            ),
+            // bottomNavigationBar: TabNavigator(currentIndex: 4)
+          ))
         ],
       ),
     );

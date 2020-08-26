@@ -1,14 +1,17 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:jitter/util/token.dart';
 
 class BaseUrl {
   // 配置默认请求地址
-  static const String url = 'http://172.24.135.25:8011/app/';
+  // static const String url = 'http://www.11wy.top:8011/';
+  static const String url = 'http://172.24.137.30:8011/app/';
 }
 
+// ignore: non_constant_identifier_names
 Future DioHttp(
     {String url,
     String method,
@@ -27,12 +30,13 @@ Future DioHttp(
     dio.options.connectTimeout = 10000; // 服务器链接超时，毫秒
     dio.options.receiveTimeout = 3000; // 响应流上前后两次接受到数据的间隔，毫秒
     dio.options.headers.addAll(headersMap); // 添加headers,如需设置统一的headers信息也可在此添加
-    dio.options.headers['Authorization'] = Token.getToken();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dio.options.headers['Authorization'] = prefs.getString('token');
 
     // 数据拼接
-    if (data != null && data.isNotEmpty) {
+    if (dataMap != null && dataMap.keys.length != 0) {
       StringBuffer options = new StringBuffer('?');
-      data.forEach((key, value) {
+      dataMap.forEach((key, value) {
         options.write('${key}=${value}&');
       });
       String optionsStr = options.toString();
@@ -46,7 +50,7 @@ Future DioHttp(
     }
 
     if (response.statusCode != 200) {
-      return false;
+      return null;
     } else {
       Map<String, dynamic> resDataMap = response.data;
       String _msg = resDataMap['msg'];
@@ -55,6 +59,8 @@ Future DioHttp(
       if (_code != 200) {
         if (_code == 500) {
           return _msg;
+        } else if (_code == 999) {
+          return _msg; // 网络异常
         }
       } else {
         Utf8Decoder utf8decoder = Utf8Decoder();

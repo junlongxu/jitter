@@ -9,6 +9,7 @@ import 'package:jitter/pages/taskpage/index.dart';
 import 'package:jitter/util/base.dart';
 import 'package:jitter/util/custom_icons.dart';
 import 'package:jitter/util/token.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TabNavigator extends StatefulWidget {
   @override
@@ -45,13 +46,17 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
-              setState(() {
-                if (index == 0) {
-                  _currentIndex = index;
-                  _controller.jumpToPage(index);
+              setState(() async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                var token = prefs.getString('token');
+
+                if (index == 0 || token != null) {
+                  setState(() {
+                    _currentIndex = index;
+                    _controller.jumpToPage(index);
+                  });
                 }
-                // if (index != 0 && Token.getToken() == null) {
-                if (index != 0) {
+                if (index != 0 && token == null) {
                   showModalBottomSheet(
                       useRootNavigator: true,
                       context: context,
@@ -59,7 +64,7 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
                       builder: (BuildContext sheetContext) =>
                           LoginPage(currentIndex: _currentIndex, index: index));
                 }
-                Token.removeToken();
+                // Token.removeToken();
               });
             },
             items: [
@@ -71,12 +76,16 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
             ]));
   }
 
+  bool _text() {
+    return true;
+  }
+
   BottomNavigationBarItem _svgWidget(String img, String title, int index) {
     return BottomNavigationBarItem(
       icon: Image.asset('assets/images/home/$img/invalid_name.png',
           width: img != 'camera' ? 25 : 45),
       activeIcon: Image.asset(
-          'assets/images/home/${img}${img != 'camera' ? '_active' : ''}/invalid_name.png',
+          'assets/images/home/$img${img != 'camera' ? '_active' : ''}/invalid_name.png',
           width: img != 'camera' ? 25 : 45),
       title: Text(
         title,
