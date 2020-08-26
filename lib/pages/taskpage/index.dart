@@ -27,10 +27,10 @@ class _TaskPageState extends State<TaskPage>
     return null;
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

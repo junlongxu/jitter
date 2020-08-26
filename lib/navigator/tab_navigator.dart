@@ -51,9 +51,9 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
                 var token = prefs.getString('token');
 
                 if (index == 0 || token != null) {
+                  _controller.jumpToPage(index);
                   setState(() {
                     _currentIndex = index;
-                    _controller.jumpToPage(index);
                   });
                 }
                 if (index != 0 && token == null) {
@@ -74,10 +74,6 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
               _svgWidget('task', '任务', 3),
               _svgWidget('my', '我的', 4)
             ]));
-  }
-
-  bool _text() {
-    return true;
   }
 
   BottomNavigationBarItem _svgWidget(String img, String title, int index) {
