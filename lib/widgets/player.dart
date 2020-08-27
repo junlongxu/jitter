@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/model/videos.dart';
 import 'package:video_player/video_player.dart';
 import 'package:jitter/widgets/loading_widget.dart';
 class Player extends StatefulWidget {
-  final String url;
-  const Player({@required this.url});
+  final VideosListItem item;
+  const Player({@required this.item});
   @override
   _PlayerState createState() => _PlayerState();
 }
@@ -13,7 +14,7 @@ class _PlayerState extends State<Player> {
   bool isPause = false;
   @override
   void initState() {
-    _controller = VideoPlayerController.network(widget?.url)
+    _controller = VideoPlayerController.network(widget?.item?.videoIdcUrl)
       ..initialize().then((_) {
         setState(() {
           _controller.play();
@@ -83,7 +84,12 @@ class _PlayerState extends State<Player> {
             // top: 54,
  
             )
-          : LoadingWidget(loadingType: LoadingType.ballSpin, size: 30.0,),
+          : Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(widget?.item?.videoImg), fit: BoxFit.none) 
+            ),
+            child: LoadingWidget(loadingType: LoadingType.ballSpin, size: 30.0,)
+          )
     );
   }
 }

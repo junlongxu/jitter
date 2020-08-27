@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:jitter/model/share.dart';
 import 'package:flutter/material.dart';
+import 'package:jitter/model/videos.dart';
 import 'package:jitter/pages/homepage/components/bottom.dart';
 import 'package:jitter/pages/mypage/index.dart';
 import 'package:jitter/util/BottomsheetUtil.dart';
@@ -11,8 +12,9 @@ import 'package:jitter/widgets/loading_widget.dart';
 
 import 'package:jitter/widgets/list_view_widget.dart';
 import 'package:jitter/dart/bottomSheet.dart' as CustomBottomSheet;
-
 class ShareLoveMessage extends StatefulWidget {
+  final VideosListItem item;
+  const ShareLoveMessage({this.item});
   @override
   _ShareLoveMessageState createState() => _ShareLoveMessageState();
 }
@@ -22,7 +24,6 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
   bool shareLoveState = false;
   String inputValue = '';
   var backfillUserData;
-  // bool shareState = false;
   String replyShareValue = ''; // 回复评论
   TextEditingController _controller = TextEditingController();
 
@@ -59,7 +60,8 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                     !loveState
                         ? 'assets/images/home/love/invalid_name.png'
                         : 'assets/images/home/love_active/invalid_name.png',
-                    '311.1w'),
+                    widget?.item?.praiseNum),
+
               )),
         ),
         _itemRightIconHeight(
@@ -69,7 +71,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
             highlightElevation: 0.01,
             backgroundColor: Colors.transparent,
             child: _loveContainer(
-                'assets/images/home/information/invalid_name.png', '311.1w'),
+                'assets/images/home/information/invalid_name.png', widget?.item?.commentNum),
           ),
         ),
         _itemRightIconHeight(
@@ -297,7 +299,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                   !shareLoveState
                       ? 'assets/images/home/love_white/invalid_name.png'
                       : 'assets/images/home/love_active/invalid_name.png',
-                  '59'),
+                  59),
             ));
       },
     );
@@ -427,7 +429,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
 }
 
 // 爱心
-Container _loveContainer([String imageUrl, String description]) => Container(
+Container _loveContainer([String imageUrl, dynamic shareAndLoveNum]) => Container(
       height: 50,
       child: Column(
         children: <Widget>[
@@ -437,7 +439,7 @@ Container _loveContainer([String imageUrl, String description]) => Container(
             height: 30,
           ),
           Text(
-            description,
+            shareAndLoveNum.toString(),
             style: TextStyle(
                 color: Colors.white, fontSize: 12, fontWeight: FontWeight.w300),
           )

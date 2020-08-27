@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/api/home.dart';
+import 'package:jitter/model/videos.dart';
 import 'package:jitter/util/base.dart';
 import 'package:jitter/widgets/player.dart';
 
 import 'components/comment_avatar.dart';
 import 'components/share_love_message.dart';
+
+const String DEFALUT_URL =
+    'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020080514/1290895585221619714/mp4/134.mp4';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,6 +17,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with Base, SingleTickerProviderStateMixin {
+  int truePageNum = 1;
+  // 视频列表
+  List<VideosListItem> videosList = new List();
+  // List<String> videoList = [
+  //     'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1453.MP4',
+  //     'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1458.MP4',
+  //     'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1546.MP4',
+  //     'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1969.MP4',
+  //   ];
   final List<String> tabList = ['关注', '推荐'];
   TabController _tabController;
 
@@ -72,12 +86,6 @@ class _HomePageState extends State<HomePage>
   }
 
   _tabView(String name) {
-    List<String> list = [
-      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1453.MP4',
-      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1458.MP4',
-      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1546.MP4',
-      'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081722/1290895585221619714/MP4/IMG_1969.MP4',
-    ];
     return name != '推荐'
         ? Center(
             child: Text(
@@ -85,34 +93,59 @@ class _HomePageState extends State<HomePage>
               style: maxTextStyle,
             ),
           )
-        : PageView.builder(
-            itemCount: list?.length ?? 0,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 300,
-                width: 300,
-                child: Stack(
-                  children: <Widget>[
-                    Player(url: list[index]),
-                    HomePosition(
-                      top: MediaQuery.of(context).size.height * 0.7,
-                      left: 10,
-                      child: CommentAvatar(
-                          url:
-                              'http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n1@2x.png'),
-                    ),
-                    HomePosition(
-                      top: MediaQuery.of(context).size.height * 0.35,
-                      left: MediaQuery.of(context).size.width * 0.8,
-                      child: ShareLoveMessage(),
-                    ),
-                  ],
-                ),
-              );
+        : FutureBuilder<VideosModel>(
+            future: _getVideos(truePageNum),
+            builder:
+                (BuildContext context, AsyncSnapshot<VideosModel> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting &&
+                  videosList.length == 0) {
+                return Container(
+                  color: Colors.black,
+                  child: Text('data'),
+                );
+              } else if (snapshot.data != null) {
+                videosList.addAll(snapshot.data.list);
+                return PageView.builder(
+                    itemCount: videosList?.length ?? 0,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == (videosList.length * 0.8).floor()) {
+                        _getVideos(++truePageNum).then((VideosModel res) {
+                          setState(() {
+                            videosList.addAll(res.list);
+                          });
+                          print(videosList);
+                        });
+                      }
+                     
+                      return Container(
+                        height: 300,
+                        width: 300,
+                        child: Stack(
+                          children: <Widget>[
+                            Player(item: videosList[index]),
+                            HomePosition(
+                              top: MediaQuery.of(context).size.height * 0.7,
+                              left: 10,
+                              child: CommentAvatar(item: videosList[index]),
+                            ),
+                            HomePosition(
+                              top: MediaQuery.of(context).size.height * 0.35,
+                              left: MediaQuery.of(context).size.width * 0.8,
+                              child: ShareLoveMessage(item: videosList[index]),
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+              }
             });
   }
 
+  Future<VideosModel> _getVideos([int pageNum = 1, int pageSize = 10]) async {
+    var videoData = await getVideos(pageNum: pageNum, pageSize: pageSize);
+    return videoData;
+  }
   // @override
   // bool get wantKeepAlive => true;
 }

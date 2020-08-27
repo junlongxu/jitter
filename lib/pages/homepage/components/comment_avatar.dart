@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/model/videos.dart';
 import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 
 class CommentAvatar extends StatefulWidget {
-  final String url;
-  const CommentAvatar({Key key, this.url}) : super(key: key);
+  final VideosListItem item;
+  const CommentAvatar({Key key, this.item}) : super(key: key);
   _CommentAvatarState createState() => _CommentAvatarState();
 }
 
@@ -20,14 +21,14 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
             CircleAvatar(
                 backgroundColor: Colors.transparent,
                 child: Image.network(
-                  widget?.url,
+                  widget?.item?.headImage,
                   width: 36,
                   height: 36,
                 )),
             Container(
-              padding: EdgeInsets.only(left: 5,right: 5),
+              padding: EdgeInsets.only(left: 5, right: 5),
               child: Text(
-                '@色情网1111',
+                widget?.item?.author,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: Color(0xfffafafa), fontSize: 14),
@@ -68,7 +69,7 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
           children: <Widget>[
             Container(
               width: 200,
-              child: Text('这位小姐姐太厉害了, 我完全不是她的对手耶 !',
+              child: Text(widget?.item?.videoTitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 14, color: Colors.white)),

@@ -1,6 +1,6 @@
 class VideosModel {
   String total;
-  List<ListItem> list;
+  List<VideosListItem> list;
   int pageNum;
   int pageSize;
   int size;
@@ -41,9 +41,9 @@ class VideosModel {
   VideosModel.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     if (json['list'] != null) {
-      list = new List<ListItem>();
+      list = new List<VideosListItem>();
       json['list'].forEach((v) {
-        list.add(new ListItem.fromJson(v));
+        list.add(new VideosListItem.fromJson(v));
       });
     }
     pageNum = json['pageNum'];
@@ -62,7 +62,6 @@ class VideosModel {
     navigatepageNums = json['navigatepageNums'].cast<int>();
     navigateFirstPage = json['navigateFirstPage'];
     navigateLastPage = json['navigateLastPage'];
-    list = json['list'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,7 +90,7 @@ class VideosModel {
   }
 }
 
-class ListItem {
+class VideosListItem {
   String publishTime;
   String author;
   int playNum;
@@ -110,7 +109,7 @@ class ListItem {
   int videoTime;
   bool areSelf;
 
-  ListItem(
+  VideosListItem(
       {this.publishTime,
       this.author,
       this.playNum,
@@ -129,7 +128,7 @@ class ListItem {
       this.videoTime,
       this.areSelf});
 
-  ListItem.fromJson(Map<String, dynamic> json) {
+  VideosListItem.fromJson(Map<String, dynamic> json) {
     publishTime = json['publishTime'];
     author = json['author'];
     playNum = json['playNum'];
