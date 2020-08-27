@@ -31,6 +31,7 @@ dependencies:
   video_player: ^0.10.11+2
   animations: ^1.1.2
   loading: ^1.0.2
+  webview_flutter: ^0.3.22+1
   flutter_webview_plugin: ^0.3.11
   shared_preferences: ^0.5.8
   # 瀑布流
