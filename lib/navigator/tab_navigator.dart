@@ -45,11 +45,10 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
             backgroundColor: Color(0xff20242f),
             currentIndex: _currentIndex,
             type: BottomNavigationBarType.fixed,
-            onTap: (index) {
-              setState(() async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                var token = prefs.getString('token');
-
+            onTap: (index) async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              var token = prefs.getString('token');
+              setState(() {
                 if (index == 0 || token != null) {
                   _controller.jumpToPage(index);
                   setState(() {

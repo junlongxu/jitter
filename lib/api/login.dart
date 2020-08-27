@@ -7,11 +7,4 @@ Future<LoginModel> login({String tel, String, String smscode}) async {
   return LoginModel.fromJson(result);
 }
 
-// POST /app/videos/recommendVideos
-Future videos({int pageSize, int pageNum}) async {
-  var result = await DioHttp(
-      url: 'videos/recommendVideos',
-      method: 'post',
-      data: {'pageSize': pageSize, 'pageNum': pageNum});
-  return result;
-}
+

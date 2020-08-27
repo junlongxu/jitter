@@ -7,8 +7,8 @@ import 'package:jitter/util/token.dart';
 
 class BaseUrl {
   // 配置默认请求地址
-  // static const String url = 'http://www.11wy.top:8011/';
-  static const String url = 'http://172.24.137.30:8011/app/';
+  static const String url = 'http://www.11wy.top:8011/app/';
+  // static const String url = 'http://172.24.135.208:8011/app/';
 }
 
 // ignore: non_constant_identifier_names

@@ -102,7 +102,10 @@ class _WebViewWidgetState extends State<WebViewWidget> {
             url: widget.url,
             withZoom: true,
             withLocalStorage: true,
-            // hidden: true,
+            displayZoomControls:true,
+            withOverviewMode: true,
+            useWideViewPort: true,
+            hidden: false,
             initialChild: Container(
               color: Colors.white,
               child: Center(
