@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:jitter/util/base.dart';
 
 class CommunityPage extends StatefulWidget {
   @override
   _CommunityPageState createState() => _CommunityPageState();
 }
 
-class _CommunityPageState extends State<CommunityPage> {
+class _CommunityPageState extends State<CommunityPage> with Base {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('CommunityPage'),
+    return Container(
+      color: themeColor,
+      child: Center(
+        child: Text('暂未开发'),
+      ),
     );
   }
 }

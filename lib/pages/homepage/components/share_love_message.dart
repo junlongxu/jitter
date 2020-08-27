@@ -5,6 +5,7 @@ import 'package:jitter/model/videos.dart';
 import 'package:jitter/pages/homepage/components/bottom.dart';
 import 'package:jitter/pages/mypage/index.dart';
 import 'package:jitter/util/BottomsheetUtil.dart';
+import 'dart:math';
 import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 import 'dart:convert';
@@ -104,10 +105,10 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
           "id": "1296065391553949698",
           "parentId": "0",
           "headImg":
-              "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
+              "http://img.touxiangwu.com/uploads/allimg/200312/-1_031215303CB6.jpg",
           "userId": "1296063479924404226",
-          "nickname": "父亲",
-          "content": "1",
+          "nickname": "心飞扬电子",
+          "content": " 回复 孤者何惧: 人都不服就服这个杆子的弹性!",
           "commentDate": "20:44",
           "praiseNum": "0",
           "replyNum": "1",
@@ -116,16 +117,50 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               "id": "1296065550417408002",
               "parentId": "0",
               "headImg":
-                  "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_03121411131Q5.jpg",
               "userId": "1296063479924404226",
-              "nickname": "孩子",
-              "content": "2",
+              "nickname": "一起发呆吧",
+              "content": "不你还有服他的臂力 ! ",
               "commentDate": "20:44",
               "praiseNum": "0",
               "toReplyUserId": "1296063479924404226",
               "toReplyUserImg":
-                  "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_0312141122HV.jpg",
+              "toReplyUserName": "Dream",
+              "commentId": "1296065391553949698",
+              "isPraise": 2
+            },
+            {
+              "id": "1296065550417408002",
+              "parentId": "0",
+              "headImg":
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_031215402Y235.jpg",
+              "userId": "1296063479924404226",
+              "nickname": "相叶不念世",
+              "content": "无线循环之大傻吊 !",
+              "commentDate": "20:44",
+              "praiseNum": "0",
+              "toReplyUserId": "1296063479924404226",
+              "toReplyUserImg":
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_031210552G5W.jpg",
               "toReplyUserName": "罗伟泽964",
+              "commentId": "1296065391553949698",
+              "isPraise": 1
+            },
+            {
+              "id": "1296065550417408002",
+              "parentId": "0",
+              "headImg":
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_03121055191c9.jpg",
+              "userId": "1296063479924404226",
+              "nickname": "Dream",
+              "content": "确实好厉害!!!",
+              "commentDate": "20:44",
+              "praiseNum": "0",
+              "toReplyUserId": "1296063479924404226",
+              "toReplyUserImg":
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_03121055234148.jpg",
+              "toReplyUserName": "心飞扬电子",
               "commentId": "1296065391553949698",
               "isPraise": 0
             },
@@ -133,49 +168,64 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
               "id": "1296065550417408002",
               "parentId": "0",
               "headImg":
-                  "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_0312105522U23.jpg",
               "userId": "1296063479924404226",
-              "nickname": "孩子2",
-              "content": "2",
+              "nickname": "千杯不醉",
+              "content": "转发.@这不是一个普普通通的男人!!!",
               "commentDate": "20:44",
               "praiseNum": "0",
               "toReplyUserId": "1296063479924404226",
               "toReplyUserImg":
-                  "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
-              "toReplyUserName": "罗伟泽964",
-              "commentId": "1296065391553949698",
-              "isPraise": 0
-            },
-            {
-              "id": "1296065550417408002",
-              "parentId": "0",
-              "headImg":
-                  "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
-              "userId": "1296063479924404226",
-              "nickname": "孩子3",
-              "content": "2",
-              "commentDate": "20:44",
-              "praiseNum": "0",
-              "toReplyUserId": "1296063479924404226",
-              "toReplyUserImg":
-                  "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
-              "toReplyUserName": "罗伟泽964",
+                  "http://img.touxiangwu.com/uploads/allimg/200312/-1_03121055203142.jpg",
+              "toReplyUserName": "心飞扬电子",
               "commentId": "1296065391553949698",
               "isPraise": 0
             }
           ],
           "videoId": "1295362901732765698",
           "commentId": "1296065391553949698",
-          "isPraise": 0
+          "isPraise": 63
         },
         {
           "id": "1296063705758314497",
           "parentId": "0",
           "headImg":
-              "http://www.akixr.top:9000/bucket1-dev/IMAGES/app-user/headimg/n3@2x.png",
+              "http://img.touxiangwu.com/uploads/allimg/200312/-1_03121055191416.jpg",
           "userId": "1296063479924404226",
-          "nickname": "母亲",
-          "content": "22",
+          "nickname": "孤者何惧",
+          "content": "不就是一个典型的视觉误差么 ",
+          "commentDate": "20:37",
+          "praiseNum": "0",
+          "replyNum": "0",
+          "child": [],
+          "videoId": "1295362901732765698",
+          "commentId": "1296063705758314497",
+          "isPraise": 3
+        },
+        {
+          "id": "1296063705758314497",
+          "parentId": "0",
+          "headImg":
+              "http://img.touxiangwu.com/uploads/allimg/200313/-1_031311512C039.jpg",
+          "userId": "1296063479924404226",
+          "nickname": "打劫(网易必胜)",
+          "content": "还是跟我上次说的一样, 盯着中间就会像圆形. ",
+          "commentDate": "20:37",
+          "praiseNum": "0",
+          "replyNum": "0",
+          "child": [],
+          "videoId": "1295362901732765698",
+          "commentId": "1296063705758314497",
+          "isPraise": 1
+        },
+        {
+          "id": "1296063705758314497",
+          "parentId": "0",
+          "headImg":
+              "http://img.touxiangwu.com/uploads/allimg/200312/-1_031215422KU6.jpg",
+          "userId": "1296063479924404226",
+          "nickname": "王嘉尔",
+          "content": "我靠 NB了 ",
           "commentDate": "20:37",
           "praiseNum": "0",
           "replyNum": "0",
@@ -233,7 +283,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                     ),
                   ),
                   ListViewWidget(dataList: shareData.list, callback: _item),
-                  _input()
+                  // _input()
                 ],
               ),
             ));
@@ -257,11 +307,11 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
     var info = StatefulBuilder(
         builder: (context, state) => GestureDetector(
               onTap: () {
-                state(() {
-                  backfillUserData = item;
-                  //  _checkedBottomSheet();
-                  _showModalBottomSheet();
-                });
+                // state(() {
+                //   backfillUserData = item;
+                //   //  _checkedBottomSheet();
+                //   _showModalBottomSheet();
+                // });
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,7 +324,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                     text: TextSpan(children: [
                       TextSpan(
                           text:
-                              '起男人的多阿萨达算哒算123阿斯萨达萨达撒阿斯顿撒电费第三方sadasa哒呵呵 ${item.content} !',
+                              item.content,
                           style: mediumTextStyle),
                       TextSpan(
                           text: '  ${item.commentDate}',
@@ -299,7 +349,7 @@ class _ShareLoveMessageState extends State<ShareLoveMessage> with Base {
                   !shareLoveState
                       ? 'assets/images/home/love_white/invalid_name.png'
                       : 'assets/images/home/love_active/invalid_name.png',
-                  59),
+                  item.isPraise),
             ));
       },
     );

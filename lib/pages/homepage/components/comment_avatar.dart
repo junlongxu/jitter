@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jitter/model/videos.dart';
+import 'package:jitter/pages/taskpage/index.dart';
+import 'package:jitter/util/NavigatorUtil.dart';
 import 'package:jitter/util/animation.dart';
 import 'package:jitter/util/base.dart';
 
@@ -18,20 +20,25 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            CircleAvatar(
-                backgroundColor: Colors.transparent,
-                child: Image.network(
-                  widget?.item?.headImage,
-                  width: 36,
-                  height: 36,
-                )),
+            GestureDetector(
+              onTap: () {
+                NavigatorUtil.push(context, TaskPage());
+              },
+              child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Image.network(
+                    widget?.item?.headImage,
+                    width: 50,
+                    height: 50,
+                  )),
+            ),
             Container(
               padding: EdgeInsets.only(left: 5, right: 5),
               child: Text(
                 widget?.item?.author,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: Color(0xfffafafa), fontSize: 14),
+                style: TextStyle(color: Color(0xfffafafa), fontSize: 16),
               ),
             ),
             Container(
@@ -47,14 +54,24 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
                       showState: loveState,
                       alignment: Alignment.centerLeft,
                       child: containerGradient(
-                        width: loveState ? 36 : 18,
-                        height: 18,
+                        width: loveState ? 50 : 25,
+                        height: 25,
                         // padding: EdgeInsets.only(top: 10),
                         child: loveState
-                            ? Text(
-                                '关注',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 10),
+                            ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.add,
+                                    color: Colors.white,
+                                    size: 14,
+                                  ),
+                                  Text(
+                                    '关注',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  )
+                                ],
                               )
                             : Icon(
                                 Icons.done,
@@ -69,10 +86,11 @@ class _CommentAvatarState extends State<CommentAvatar> with Base {
           children: <Widget>[
             Container(
               width: 200,
+              margin: EdgeInsets.only(left: 8, top: 8),
               child: Text(widget?.item?.videoTitle,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 14, color: Colors.white)),
+                  style: TextStyle(fontSize: 16, color: Colors.white)),
             )
           ],
         )

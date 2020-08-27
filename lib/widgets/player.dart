@@ -82,11 +82,10 @@ class _PlayerState extends State<Player> {
             // right: 0,
             // bottom: 0,
             // top: 54,
- 
             )
           : Container(
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(widget?.item?.videoImg), fit: BoxFit.none) 
+              image: DecorationImage(image: NetworkImage(widget?.item?.videoImg), fit: BoxFit.fitWidth) 
             ),
             child: LoadingWidget(loadingType: LoadingType.ballSpin, size: 30.0,)
           )
