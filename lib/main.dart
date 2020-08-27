@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'navigator/tab_navigator.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle style = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light);
+    SystemChrome.setSystemUIOverlayStyle(style);
+  }
 }
 
 class MyApp extends StatelessWidget {

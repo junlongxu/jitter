@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage>
     with Base, SingleTickerProviderStateMixin {
   final List<String> tabList = ['关注', '推荐'];
   TabController _tabController;
+
   @override
   void initState() {
     _tabController =
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: themeColor,
         body: Stack(
           children: <Widget>[
             HomePosition(

@@ -39,7 +39,12 @@ class _TaskPageState extends State<TaskPage>
             future: getToken(),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text('loading');
+                return Container(
+                  // color: Colors.red,
+                  // decoration: BoxDecoration(
+                  //   image: DecorationImage(image: AssetImage('assets/images/task/mask/invalid_name.png'), fit: BoxFit.cover)
+                  // ),
+                );
               } else if (snapshot.data != null) {
                 return WebViewWidget(
                   url:
