@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Container(
         color: Color(0xff242a37),
+        // color: Colors.transparent,
         child: Media(),
       ),
     );
