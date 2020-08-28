@@ -5,9 +5,9 @@ import 'package:jitter/util/base.dart';
 import 'package:jitter/util/token.dart';
 
 class LoginPage extends StatefulWidget {
-  int currentIndex;
-  int index;
-  LoginPage({Key key, this.currentIndex, this.index}) : super(key: key);
+  // int currentIndex;
+  // int index;
+  // LoginPage({Key key, this.currentIndex, this.index}) : super(key: key);
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> with Base {
           color: Colors.white.withOpacity(0.3),
           borderRadius: BorderRadius.circular(10),
         ),
-        height: 300,
+        // height: 300,
         child: Row(
           children: <Widget>[
             Container(
@@ -55,31 +55,31 @@ class _LoginPageState extends State<LoginPage> with Base {
                 width: MediaQuery.of(context).size.width -
                     (20 + 40), // 两侧padding和右侧元素宽度
                 child: FormTestRoute(
-                  currentIndex: widget?.currentIndex,
-                  index: widget?.index,
+                  // currentIndex: widget?.currentIndex,
+                  // index: widget?.index,
                 )),
-            Positioned(
-              right: 10,
-              child: Container(
-                decoration: BoxDecoration(color: Colors.black.withOpacity(0.4)),
-                width: 40,
-                padding: EdgeInsets.only(left: 20, top: 70),
-                height: 300,
-                child: Text(
-                  '新用户注册',
-                  style: largeTextStyle,
-                ),
-              ),
-            )
+            // Positioned(
+            //   right: 10,
+            //   child: Container(
+            //     decoration: BoxDecoration(color: Colors.black.withOpacity(0.4)),
+            //     width: 40,
+            //     padding: EdgeInsets.only(left: 20, top: 70),
+            //     height: 300,
+            //     child: Text(
+            //       '新用户注册',
+            //       style: largeTextStyle,
+            //     ),
+            //   ),
+            // )
           ],
         ));
   }
 }
 
 class FormTestRoute extends StatefulWidget {
-  int currentIndex;
-  int index;
-  FormTestRoute({Key key, this.currentIndex, this.index}) : super(key: key);
+  // int currentIndex;
+  // int index;
+  // FormTestRoute({Key key, this.currentIndex, this.index}) : super(key: key);
   @override
   _FormTestRouteState createState() => new _FormTestRouteState();
 }
@@ -168,7 +168,7 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
                                         smscode: _pwdController.text)
                                     .then((LoginModel res) {
                                   Token.setToken(res.token);
-                                  widget?.currentIndex = widget?.index;
+                                  // widget?.currentIndex = widget?.index;
                                   Navigator.pop(context);
                                   // setState(() {
                                   // });

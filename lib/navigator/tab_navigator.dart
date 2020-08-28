@@ -61,7 +61,7 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
                       context: context,
                       isScrollControlled: true,
                       builder: (BuildContext sheetContext) =>
-                          LoginPage(currentIndex: _currentIndex, index: index));
+                          LoginPage());
                 }
                 // Token.removeToken();
               });

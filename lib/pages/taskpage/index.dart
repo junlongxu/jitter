@@ -9,7 +9,8 @@ class TaskPage extends StatefulWidget {
   _TaskPageState createState() => _TaskPageState();
 }
 
-class _TaskPageState extends State<TaskPage> with Base, AutomaticKeepAliveClientMixin {
+class _TaskPageState extends State<TaskPage>
+    with Base, AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     // TODO: implement initState
@@ -39,11 +40,13 @@ class _TaskPageState extends State<TaskPage> with Base, AutomaticKeepAliveClient
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Container(
-                    // color: Colors.red,
-                    // decoration: BoxDecoration(
-                    //   image: DecorationImage(image: AssetImage('assets/images/task/mask/invalid_name.png'), fit: BoxFit.cover)
-                    // ),
-                    );
+                  color: Colors.red,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                              'assets/images/task/mask/invalid_name.png'),
+                          fit: BoxFit.cover)),
+                );
               } else if (snapshot.data != null) {
                 return WebViewWidget(
                   url:

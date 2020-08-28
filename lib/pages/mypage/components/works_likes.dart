@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jitter/util/base.dart';
 import 'package:jitter/widgets/grid_view_widget.dart';
-import 'package:jitter/widgets/player.dart';
 
 class WorksLikes extends StatefulWidget {
   @override
@@ -82,22 +81,23 @@ class _WorksLikesState extends State<WorksLikes>
   Widget _imgItem(String imgUrl) {
     bool isPlayer = false;
     return GestureDetector(
-      onTap: () {
-        isPlayer = !isPlayer;
-      },
-      child: !isPlayer
-          ? Container(
-              height: 400,
-              decoration: BoxDecoration(
-                
-                  image: DecorationImage(
-                      image: NetworkImage(imgUrl), fit: BoxFit.cover),
-                  borderRadius: BorderRadius.circular(4)),
-              child: Stack(
-                children: <Widget>[],
-              ),
-            )
-          : Player(),
-    );
+        onTap: () {
+          isPlayer = !isPlayer;
+        },
+        child:
+            // !isPlayer
+            // ?
+            Container(
+          height: 400,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(imgUrl), fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(4)),
+          child: Stack(
+            children: <Widget>[],
+          ),
+        )
+        // : Player(),
+        );
   }
 }

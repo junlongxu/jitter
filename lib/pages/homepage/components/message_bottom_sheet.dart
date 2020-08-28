@@ -3,7 +3,6 @@ import 'package:jitter/model/share.dart';
 import 'package:jitter/util/base.dart';
 import 'package:jitter/widgets/list_view_widget.dart';
 
-import 'package:jitter/widgets/loading_widget.dart';
 import 'package:jitter/dart/bottomSheet.dart' as CustomBottomSheet;
 
 class EachComment extends StatelessWidget with Base {
