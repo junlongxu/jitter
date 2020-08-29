@@ -159,7 +159,7 @@ class EachComment extends StatelessWidget with Base {
 
   // 评论消息
   _item({item, bool isChild = false}) {
-    bool loadMoreReplies = false;
+    // bool loadMoreReplies = false;
     // 头像
     var leftImag = Container(
       margin: EdgeInsets.fromLTRB(0, 8, 10, 8),

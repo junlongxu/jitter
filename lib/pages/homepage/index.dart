@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage>
                     itemCount: videosList?.length ?? 0,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (BuildContext context, int index) {
-                      if (index == (videosList.length * 0.8).floor()) {
+                      if (index == (videosList.length - 2).floor()) {
                         _getVideos(++truePageNum).then((VideosModel res) {
                           setState(() {
                             videosList.addAll(res.list);

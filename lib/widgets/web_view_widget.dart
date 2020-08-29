@@ -44,7 +44,7 @@ class _WebViewWidgetState extends State<WebViewWidget> {
       // to allow calling Scaffold.of(context) so we can show a snackbar.
       body: Builder(builder: (BuildContext context) {
         return WebView(
-          initialUrl: 'http://172.24.136.31:8012/#/task?token=fac17ecd754ce994e9e8d4e77f173fba',
+          initialUrl: widget?.url,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);

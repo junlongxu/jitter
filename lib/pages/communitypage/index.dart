@@ -12,7 +12,7 @@ class _CommunityPageState extends State<CommunityPage> with Base {
     return Container(
       color: themeColor,
       child: Center(
-        child: Text('敬请期待'),
+        child: Text('敬请期待!!!'),
       ),
     );
   }

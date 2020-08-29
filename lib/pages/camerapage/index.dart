@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jitter/pages/login/index.dart';
 import 'package:jitter/util/base.dart';
 
 class CameraPage extends StatefulWidget {
