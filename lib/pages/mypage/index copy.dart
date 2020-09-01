@@ -76,7 +76,7 @@ class _CommentTestState extends State<CommentTest> {
                 );
               },
             ),
-            Player(url: 'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1453.MP4',),
+            // Player(url: 'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020081721/1290895585221619714/MP4/IMG_1453.MP4',),
             Positioned(
               left: 0,
               bottom: 0,
