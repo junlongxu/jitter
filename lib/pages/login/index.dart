@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jitter/api/login.dart';
 import 'package:jitter/model/login.dart';
 import 'package:jitter/util/base.dart';
-import 'package:jitter/util/token.dart';
+import 'package:jitter/util/sp_util.dart';
+import 'package:jitter/widgets/button_widget.dart';
+import 'package:jitter/widgets/player.dart';
 
 class LoginPage extends StatefulWidget {
   // int currentIndex;
@@ -19,26 +21,52 @@ class _LoginPageState extends State<LoginPage> with Base {
     return Container(
       width: size.width,
       height: size.height,
-      padding: EdgeInsets.all(boundarySize),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image:
-                AssetImage('assets/images/login/background/invalid_name.png'),
-            fit: BoxFit.cover),
-      ),
-      child: new SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Image.asset(
-              'assets/images/login/logo/invalid_name.png',
-              width: 180,
-              height: 180,
-            ),
-            _loginForm()
-          ],
-        ),
+      // padding: EdgeInsets.all(boundarySize),
+      child: Stack(
+        children: <Widget>[
+          Player(
+            videoIdcUrl:
+                'http://www.akixr.top:9000/bucket1-dev/VIDEOS/2020090719/1290895585221619714/mp4/安卓登录背景视频.mp4',
+            videoImg: 'assets/images/login/background/invalid_name.jpg',
+            isClean: true,
+          ),
+          Column(
+            children: <Widget>[
+              Image.asset(
+                'assets/images/login/logo/invalid_name.png',
+                width: 180,
+                height: 180,
+              ),
+              _loginForm()
+            ],
+          ),
+        ],
       ),
     );
+
+    // return Container(
+    //   width: size.width,
+    //   height: size.height,
+    //   padding: EdgeInsets.all(boundarySize),
+    //   decoration: BoxDecoration(
+    //     image: DecorationImage(
+    //         image:
+    //             AssetImage('assets/images/login/background/invalid_name.jpg'),
+    //         fit: BoxFit.cover),
+    //   ),
+    //   child: new SingleChildScrollView(
+    //     child: Column(
+    //       children: <Widget>[
+    //         Image.asset(
+    //           'assets/images/login/logo/invalid_name.png',
+    //           width: 180,
+    //           height: 180,
+    //         ),
+    //         _loginForm()
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _loginForm() {
@@ -51,13 +79,14 @@ class _LoginPageState extends State<LoginPage> with Base {
         child: Row(
           children: <Widget>[
             Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                width: MediaQuery.of(context).size.width -
-                    (20 + 40), // 两侧padding和右侧元素宽度
-                child: FormTestRoute(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              width: MediaQuery.of(context).size.width -
+                  (20 + 40), // 两侧padding和右侧元素宽度
+              child: FormTestRoute(
                   // currentIndex: widget?.currentIndex,
                   // index: widget?.index,
-                )),
+                  ),
+            ),
             // Positioned(
             //   right: 10,
             //   child: Container(
@@ -92,8 +121,8 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
   @override
   void initState() {
     // TODO: implement initState
-    _unameController.text = '13720242565';
-    _pwdController.text = '111111';
+    _unameController.text = '15965899999';
+    _pwdController.text = '123456';
     super.initState();
   }
 
@@ -106,7 +135,7 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                      autofocus: true,
+                      // autofocus: true,
                       controller: _unameController,
                       decoration: InputDecoration(
                           labelStyle: TextStyle(
@@ -145,15 +174,10 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                            child: containerGradient(
-                          height: null,
-                          child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)),
-                            color: Colors.transparent, // 设为透明色
-                            elevation: 0, // 正常时阴影隐藏
-                            highlightElevation: 0, // 点击时阴影隐藏
-                            onPressed: () {
+                          child: ButtonWidget(
+                            title: '登  录',
+                            height: 50,
+                            callback: () {
                               //在这里不能通过此方式获取FormState，context不对
                               //print(Form.of(context));
                               // 通过_formKey.currentState 获取FormState后，
@@ -161,30 +185,22 @@ class _FormTestRouteState extends State<FormTestRoute> with Base {
                               // 通过后再提交数据。
                               if ((_formKey.currentState as FormState)
                                   .validate()) {
-                                //验证通过提交数据
+                                // 验证通过提交数据
                                 // videos(pageSize: 10,pageNum: 1).then((value) => null);
                                 login(
-                                        tel: _unameController.text,
-                                        smscode: _pwdController.text)
+                                    account: _unameController.text,
+                                        password: _pwdController.text)
                                     .then((LoginModel res) {
-                                  Token.setToken(res.token);
-                                  // widget?.currentIndex = widget?.index;
-                                  Navigator.pop(context);
-                                  // setState(() {
-                                  // });
+                                      
+                                  SpUtil.prefs.setString('token', res.token);
+                                  SpUtil.prefs.setString('userId', res.uid);
+                                  Navigator.of(context).pop('true');
                                 });
                               }
                             },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 50,
-                              child: Text(
-                                '登 录',
-                                style: largeTextStyle,
-                              ),
-                            ),
                           ),
-                        )),
+                        ),
+                        // largeTextStyle
                       ],
                     ),
                   )

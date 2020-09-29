@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!--  tablayout指示器长度  -->
+    <item android:gravity="center">
+        <shape>
+            <size
+                android:width="130dp"
+                android:height="2dp" />
+            <corners android:radius="4dp" />
+
+            <solid android:color="@color/color_f54b64" />
+        </shape>
+    </item>
+</layer-list>

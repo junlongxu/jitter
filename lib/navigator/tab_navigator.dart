@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jitter/pages/camerapage/index.dart';
 import 'package:jitter/pages/communitypage/index.dart';
+import 'package:jitter/pages/login/components/show_model_sheet.dart';
 import 'package:jitter/pages/homepage/index.dart';
 import 'package:jitter/pages/login/index.dart';
 import 'package:jitter/pages/mypage/index.dart';
+import 'package:jitter/pages/startPage/index.dart';
 import 'package:jitter/pages/taskpage/index.dart';
 
 import 'package:jitter/util/base.dart';
+import 'package:jitter/util/eventBus.dart';
 // import 'package:jitter/util/custom_icons.dart';
-import 'package:jitter/util/token.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:jitter/util/sp_util.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+const MethodChannel _nativeChannel =
+    const MethodChannel('com.example.jitter/MainActivity');
 
 class TabNavigator extends StatefulWidget {
   @override
@@ -19,6 +26,7 @@ class TabNavigator extends StatefulWidget {
 class _TabNavigatorState extends State<TabNavigator> with Base {
   int _currentIndex = 0;
   bool isHome = true;
+  bool isSplashPage = true;
   final PageController _controller = PageController(initialPage: 0);
   final List<dynamic> pages = [
     HomePage(),
@@ -35,45 +43,76 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GestureDetector(
+      // onTap: () async {
+      //   //调用原生下载
+      //   // _nativeChannel.invokeMethod("apkdownLoad", "url": https://bt.5li2v2.com/channel/android/hqbetgame_6215472_2.0.2_0913213641.apk);
+      //   setState(() {
+      //     isSplashPage = false;
+      //   });
+      //   const url =
+      //       'https://bt.5li2v2.com/channel/android/hqbetgame_6215472_2.0.2_0913213641.apk';
+      //   if (await canLaunch(url)) {
+      //     await launch(url);
+      //   } else {
+      //     throw 'Could not launch $url';
+      //   }
+      // },
+      // child: isSplashPage ? SplashPage() : _scaffold,
+      child: _scaffold,
+    );
+  }
+
+  Widget get _scaffold => Scaffold(
         body: PageView(
           controller: _controller,
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[...pages],
         ),
         bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Color(0xff20242f),
-            currentIndex: _currentIndex,
-            type: BottomNavigationBarType.fixed,
-            onTap: (index) async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              var token = prefs.getString('token');
-              setState(() {
-                if (index == 0 || token != null) {
-                  _controller.jumpToPage(index);
+          elevation: 0,
+          backgroundColor: Color(0xff20242f),
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12.0,
+          unselectedFontSize: 12.0,
+          onTap: (index) {
+            String token = SpUtil.prefs.getString('token');
+            setState(() {
+              if (index == 0 || token != null) {
+                _controller.jumpToPage(index);
+                setState(() {
+                  _currentIndex = index;
+                });
+              }
+              if (index != 0 && token != null) {
+                VideoPlayerEvent
+                    .controllers[VideoPlayerEvent.controllers.length - 1]
+                    .pause();
+              }
+              if (index == 0) {
+                VideoPlayerEvent
+                    .controllers[VideoPlayerEvent.controllers.length - 1]
+                    .play();
+              }
+              if (index != 0 && token == null) {
+                ShowModelSheet.showLogin(context).then((res) {
                   setState(() {
                     _currentIndex = index;
                   });
-                }
-                if (index != 0 && token == null) {
-                  showModalBottomSheet(
-                      useRootNavigator: true,
-                      context: context,
-                      isScrollControlled: true,
-                      builder: (BuildContext sheetContext) =>
-                          LoginPage());
-                }
-                // Token.removeToken();
-              });
-            },
-            items: [
-              _svgWidget('home', '首页', 0),
-              _svgWidget('community', '社区', 1),
-              _svgWidget('camera', '', 2),
-              _svgWidget('task', '任务', 3),
-              _svgWidget('my', '我的', 4)
-            ]));
-  }
+                });
+              }
+            });
+          },
+          items: [
+            _svgWidget('home', '首页', 0),
+            _svgWidget('community', '社区', 1),
+            _svgWidget('camera', '', 2),
+            _svgWidget('task', '任务', 3),
+            _svgWidget('my', '我的', 4)
+          ],
+        ),
+      );
 
   BottomNavigationBarItem _svgWidget(String img, String title, int index) {
     return BottomNavigationBarItem(
@@ -85,7 +124,6 @@ class _TabNavigatorState extends State<TabNavigator> with Base {
       title: Text(
         title,
         style: TextStyle(
-            fontSize: 12,
             foreground: _currentIndex != index
                 ? (Paint()
                   ..shader = textGradient(Color(0xff9c9ea3), Color(0xff9c9ea3)))

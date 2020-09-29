@@ -34,9 +34,14 @@ dependencies:
   webview_flutter: ^0.3.22+1
   # flutter_webview_plugin: ^0.3.11
   shared_preferences: ^0.5.8
+  package_info: ^0.4.3
   # flutter_staggered_grid_view: ^0.3.2
   dio: ^3.0.10
-  
+  photo_view: ^0.10.2
+  url_launcher: ^5.5.2
+  provider: ^4.3.2+2
+  event_bus: ^1.1.1
+  fluttertoast: ^7.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -54,6 +59,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    # ------------启动页
+      - assets/images/startPage/startPage.jpg
     # ------------首页
       - assets/images/home/home/invalid_name.png
       - assets/images/home/home/drawable-hdpi/invalid_name.png
@@ -160,6 +167,34 @@ flutter:
       - assets/images/home/share/drawable-xhdpi/invalid_name.png
       - assets/images/home/share/drawable-xxhdpi/invalid_name.png
       - assets/images/home/share/drawable-xxxhdpi/invalid_name.png
+    # 播放暂停按钮
+      - assets/images/home/play/invalid_name.png
+      - assets/images/home/play/drawable-hdpi/invalid_name.png
+      - assets/images/home/play/drawable-mdpi/invalid_name.png
+      - assets/images/home/play/drawable-xhdpi/invalid_name.png
+      - assets/images/home/play/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/play/drawable-xxxhdpi/invalid_name.png
+    # 分享背景图
+      - assets/images/home/share_background/invalid_name.png
+      - assets/images/home/share_background/drawable-hdpi/invalid_name.png
+      - assets/images/home/share_background/drawable-mdpi/invalid_name.png
+      - assets/images/home/share_background/drawable-xhdpi/invalid_name.png
+      - assets/images/home/share_background/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/share_background/drawable-xxxhdpi/invalid_name.png
+    # 分享复制链接icon
+      - assets/images/home/share_copy/invalid_name.png
+      - assets/images/home/share_copy/drawable-hdpi/invalid_name.png
+      - assets/images/home/share_copy/drawable-mdpi/invalid_name.png
+      - assets/images/home/share_copy/drawable-xhdpi/invalid_name.png
+      - assets/images/home/share_copy/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/share_copy/drawable-xxxhdpi/invalid_name.png
+    # 分享保存链接icon
+      - assets/images/home/share_down/invalid_name.png
+      - assets/images/home/share_down/drawable-hdpi/invalid_name.png
+      - assets/images/home/share_down/drawable-mdpi/invalid_name.png
+      - assets/images/home/share_down/drawable-xhdpi/invalid_name.png
+      - assets/images/home/share_down/drawable-xxhdpi/invalid_name.png
+      - assets/images/home/share_down/drawable-xxxhdpi/invalid_name.png
       
 
     # ---------------登录页面
@@ -169,8 +204,8 @@ flutter:
       - assets/images/login/logo/drawable-xhdpi/invalid_name.png
       - assets/images/login/logo/drawable-xxhdpi/invalid_name.png
       - assets/images/login/logo/drawable-xxxhdpi/invalid_name.png
-      # 背景
-      - assets/images/login/background/invalid_name.png
+      # 登录背景图
+      - assets/images/login/background/invalid_name.jpg
 
     # ----------------任务
       - assets/images/task/mask/invalid_name.png
@@ -179,15 +214,58 @@ flutter:
       - assets/images/task/mask/drawable-xhdpi/invalid_name.png
       - assets/images/task/mask/drawable-xxhdpi/invalid_name.png
       - assets/images/task/mask/drawable-xxxhdpi/invalid_name.png
-  #   - assets/svgs/home.svg
-  #   - assets/svgs/home_active.svg
-  #   - assets/svgs/community.svg
-  #   - assets/svgs/community_active.svg
-  #   - assets/svgs/camera.svg
-  #   - assets/svgs/task.svg
-  #   - assets/svgs/task_active.svg
-  #   - assets/svgs/my.svg
-  #   - assets/svgs/my_active.svg
+    # ----------------社区
+      - assets/images/camera/background/invalid_name.png
+      - assets/images/camera/background/drawable-hdpi/invalid_name.png
+      - assets/images/camera/background/drawable-mdpi/invalid_name.png
+      - assets/images/camera/background/drawable-xhdpi/invalid_name.png
+      - assets/images/camera/background/drawable-xxhdpi/invalid_name.png
+      - assets/images/camera/background/drawable-xxxhdpi/invalid_name.png
+
+    # ---------------我的
+      - assets/images/my/balance/invalid_name.png
+      - assets/images/my/balance/drawable-hdpi/invalid_name.png
+      - assets/images/my/balance/drawable-mdpi/invalid_name.png
+      - assets/images/my/balance/drawable-xhdpi/invalid_name.png
+      - assets/images/my/balance/drawable-xxhdpi/invalid_name.png
+      - assets/images/my/balance/drawable-xxxhdpi/invalid_name.png
+
+      - assets/images/my/coins/invalid_name.png
+      - assets/images/my/coins/drawable-hdpi/invalid_name.png
+      - assets/images/my/coins/drawable-mdpi/invalid_name.png
+      - assets/images/my/coins/drawable-xhdpi/invalid_name.png
+      - assets/images/my/coins/drawable-xxhdpi/invalid_name.png
+      - assets/images/my/coins/drawable-xxxhdpi/invalid_name.png
+
+      - assets/images/my/friends/invalid_name.png
+      - assets/images/my/friends/drawable-hdpi/invalid_name.png
+      - assets/images/my/friends/drawable-mdpi/invalid_name.png
+      - assets/images/my/friends/drawable-xhdpi/invalid_name.png
+      - assets/images/my/friends/drawable-xxhdpi/invalid_name.png
+      - assets/images/my/friends/drawable-xxxhdpi/invalid_name.png
+
+      - assets/images/my/help_center/invalid_name.png
+      - assets/images/my/help_center/drawable-hdpi/invalid_name.png
+      - assets/images/my/help_center/drawable-mdpi/invalid_name.png
+      - assets/images/my/help_center/drawable-xhdpi/invalid_name.png
+      - assets/images/my/help_center/drawable-xxhdpi/invalid_name.png
+      - assets/images/my/help_center/drawable-xxxhdpi/invalid_name.png
+
+      - assets/images/my/invitation_code/invalid_name.png
+      - assets/images/my/invitation_code/drawable-hdpi/invalid_name.png
+      - assets/images/my/invitation_code/drawable-mdpi/invalid_name.png
+      - assets/images/my/invitation_code/drawable-xhdpi/invalid_name.png
+      - assets/images/my/invitation_code/drawable-xxhdpi/invalid_name.png
+      - assets/images/my/invitation_code/drawable-xxxhdpi/invalid_name.png
+
+      - assets/images/my/sex1/invalid_name.png
+      - assets/images/my/sex1/drawable-hdpi/invalid_name.png
+      - assets/images/my/sex1/drawable-mdpi/invalid_name.png
+      - assets/images/my/sex1/drawable-xhdpi/invalid_name.png
+      - assets/images/my/sex1/drawable-xxhdpi/invalid_name.png
+      - assets/images/my/sex1/drawable-xxxhdpi/invalid_name.png
+
+      
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

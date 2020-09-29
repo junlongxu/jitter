@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.jitter.record.view.CameraView
+        android:id="@+id/cameraView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/ViewWrap"
+        android:padding="20dp"
+        android:id="@+id/backView"
+        android:src="@drawable/vector_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/ViewWrap"
+        android:padding="20dp"
+        android:id="@+id/view_lens"
+        android:src="@drawable/img_lens_switch"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/ViewWrap"
+        android:layout_marginEnd="32dp"
+        android:visibility="gone"
+        android:id="@+id/view_del"
+        android:src="@drawable/img_record_del"
+        app:layout_constraintTop_toTopOf="@id/view_shoot"
+        app:layout_constraintEnd_toStartOf="@id/view_shoot"
+        app:layout_constraintBottom_toBottomOf="@id/view_shoot" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/ViewWrap"
+        android:id="@+id/view_shoot"
+        android:layout_marginBottom="85dp"
+        android:src="@drawable/img_shooting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        style="@style/ViewWrap"
+        android:visibility="gone"
+        android:id="@+id/view_confirm"
+        android:layout_marginStart="32dp"
+        android:src="@drawable/img_record_ticked"
+        app:layout_constraintTop_toTopOf="@id/view_shoot"
+        app:layout_constraintStart_toEndOf="@id/view_shoot"
+        app:layout_constraintBottom_toBottomOf="@id/view_shoot" />
+
+    <com.example.jitter.record.view.ProgressView
+        android:layout_height="8dp"
+        android:id="@+id/view_progress"
+        android:layout_marginBottom="60dp"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/timeLayout"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.example.jitter.widget.SelectIndicationTextView
+            android:id="@+id/view_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_button"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,20 @@
-import 'dart:io';
+// import 'dart:io';
+// import 'dart:ui';
 import 'package:dio/dio.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:jitter/util/token.dart';
+import 'package:jitter/util/sp_util.dart';
 
 class BaseUrl {
-  // 配置默认请求地址
-  static const String url = 'http://www.11wy.top:8011/app/';
-  // static const String url = 'http://172.24.135.208:8011/app/';
+  // uat环境
+  // static const String url = 'http://www.11wy.top/api/app/';
+
+  //开发环境
+  static const String url = 'http://172.24.135.209:8011/app/';
+
+  //测试环境
+  // static const String url = "http://172.24.135.204:8011/app/";
+
 }
 
 // ignore: non_constant_identifier_names
@@ -30,14 +36,13 @@ Future DioHttp(
     dio.options.connectTimeout = 10000; // 服务器链接超时，毫秒
     dio.options.receiveTimeout = 3000; // 响应流上前后两次接受到数据的间隔，毫秒
     dio.options.headers.addAll(headersMap); // 添加headers,如需设置统一的headers信息也可在此添加
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    dio.options.headers['Authorization'] = prefs.getString('token');
+    dio.options.headers['Authorization'] = SpUtil.prefs.getString('token');
 
     // 数据拼接
     if (dataMap != null && dataMap.keys.length != 0) {
       StringBuffer options = new StringBuffer('?');
       dataMap.forEach((key, value) {
-        options.write('${key}=${value}&');
+        options.write('$key=$value&');
       });
       String optionsStr = options.toString();
       optionsStr = optionsStr.substring(0, optionsStr.length - 1);
@@ -56,11 +61,14 @@ Future DioHttp(
       String _msg = resDataMap['msg'];
       int _code = resDataMap['code'];
       Map _resData = resDataMap['data'];
+
       if (_code != 200) {
         if (_code == 500) {
           return _msg;
         } else if (_code == 999) {
           return _msg; // 网络异常
+        } else if (_code == 401) {
+          SpUtil.prefs.clear();
         }
       } else {
         Utf8Decoder utf8decoder = Utf8Decoder();
@@ -69,7 +77,7 @@ Future DioHttp(
       }
     }
   } catch (err) {
-    return '数据请求错误$err.toString';
+    return '数据请求错误${err.toString}';
   }
 }
 

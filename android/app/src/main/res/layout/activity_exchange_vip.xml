@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
+
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:id="@+id/topPicVieW"
+        android:src="@drawable/img_vip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:text="未开通"
+        style="@style/WhiteTextStyle"
+        android:id="@+id/expireView"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:background="#B3000000"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="@id/topPicVieW"
+        app:layout_constraintBottom_toBottomOf="@id/topPicVieW"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:text="选择会员天数"
+        style="@style/WhiteTextStyle"
+        android:layout_marginTop="20dp"
+        android:id="@android:id/text1"
+        app:layout_constraintStart_toStartOf="@id/topPicVieW"
+        app:layout_constraintTop_toBottomOf="@id/topPicVieW"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:spanCount="3"
+        tools:itemCount="6"
+        android:layout_marginTop="10dp"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/item_vip_price"
+        app:layout_constraintTop_toBottomOf="@android:id/text1"/>
+
+    <Button
+        style="@style/ButtonStyle"
+        android:text="立即兑换"
+        android:layout_width="144dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/confirmButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"/>
+
+    <TextView
+        android:textStyle="bold"
+        android:text="会员权益"
+        style="@style/WhiteTextStyle"
+        android:id="@android:id/text2"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/text3"
+        app:layout_constraintStart_toStartOf="@id/topPicVieW"/>
+
+    <TextView
+        style="@style/ViewWrap"
+        android:id="@+id/text3"
+        android:textSize="12sp"
+        android:textColor="#99FFFFFF"
+        android:layout_marginBottom="30dp"
+        android:text="@string/rights_stated"
+        app:layout_constraintStart_toStartOf="@id/topPicVieW"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

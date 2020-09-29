@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:textSize="15sp"
+        tools:text="抖币转余额"
+        android:textStyle="bold"
+        android:id="@+id/record_name"
+        style="@style/WhiteTextStyle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        tools:text="2020年9月10日19点53分"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/record_time"
+        style="@style/WhiteTextStyle"
+        android:textColor="#99FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/record_name"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        tools:text="状态"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:id="@+id/record_state"
+        style="@style/WhiteTextStyle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

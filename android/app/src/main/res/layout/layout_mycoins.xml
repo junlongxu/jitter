@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="15dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginTop="15dp"
+    app:contentPaddingLeft="15dp"
+    app:contentPaddingBottom="10dp"
+    app:cardBackgroundColor="@color/color_242A37">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            style="@style/ViewWrap"
+            android:id="@+id/img_coins"
+            android:src="@drawable/img_tikcoins"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/geView"
+            style="@style/WhiteTextStyle"
+            android:layout_marginStart="15dp"
+            android:text="当前抖币(个)"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/img_coins"
+            app:layout_constraintTop_toTopOf="@id/img_coins" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="0"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/coin_sumsView"
+            style="@style/WhiteTextStyle"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="@id/geView"
+            app:layout_constraintEnd_toEndOf="@id/coin_changeView"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/WhiteTextStyle"
+            android:text="兑换余额"
+            android:gravity="center"
+            android:id="@+id/coin_changeView"
+            android:layout_width="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            android:background="@drawable/bg_paled_rounded"
+            app:layout_constraintStart_toStartOf="@id/geView"
+            app:layout_constraintTop_toBottomOf="@id/geView"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/ViewWrap"
+            android:layout_marginTop="10dp"
+            android:text="温馨提示：若连续30天未登录，未提现的收益将清空"
+            android:textColor="#66FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/coin_changeView"
+            app:layout_constraintTop_toBottomOf="@id/coin_changeView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

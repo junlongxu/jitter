@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="110dp"
+    android:layout_height="135dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/item_video_bg"
+        android:background="@mipmap/ic_launcher"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:layout_width="18dp"
+        android:id="@+id/item_video_del"
+        android:layout_height="18dp"
+        android:layout_gravity="end"
+        android:visibility="invisible"
+        android:layout_margin="10dp"
+        android:background="@mipmap/icon" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textColor="@color/color_ffffff"
+        android:id="@+id/item_video_hint"
+        android:background="#6000"
+        android:paddingStart="5dp"
+        android:text="审核中" />
+
+</androidx.cardview.widget.CardView>

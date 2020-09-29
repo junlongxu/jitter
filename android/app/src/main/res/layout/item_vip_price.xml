@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:background="@drawable/bg_vip_days">
+
+    <TextView
+        tools:text="1天"
+        android:id="@+id/daysView"
+        style="@style/WhiteTextStyle"/>
+
+    <TextView
+        tools:text="8.88元"
+        style="@style/ViewWrap"
+        android:id="@+id/priceView"
+        android:layout_marginTop="5dp"
+        android:textColor="#99FFFFFF"/>
+
+</LinearLayout>

@@ -4,8 +4,8 @@ class VideosModel {
   int pageNum;
   int pageSize;
   int size;
-  int startRow;
-  int endRow;
+  String startRow;
+  String endRow;
   int pages;
   int prePage;
   int nextPage;
@@ -103,9 +103,9 @@ class VideosListItem {
   String videoTitle;
   String videoSize;
   int commentNum;
-  String isAttention;
+  int isAttention;
   String videoIdcUrl;
-  String isPraise;
+  int isPraise;
   int videoTime;
   bool areSelf;
 

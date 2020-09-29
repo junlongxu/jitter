@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="balance_withdraw">余额提现</string>
+    <string name="withdraw_details">提现详情</string>
+    <string name="exchange_vip">兑换会员</string>
+    <string name="upload_stated">上传须知</string>
+    <string name="stated_content">
+        1.上传的视频将由平台进行审核，审核时间为24小时，请注意查收反馈。\n\n
+        2，上传的作品可在“我的-作品”中查看审核进度、进行管理删除。\n\n
+        3，上传的视频内容不符合上传要求审核不通过者，连续三次不通过将永久禁止上传。\n\n
+        4，在视频中任意位置，发现添加联系方式或者插入广告，将永久禁止上传。\n\n
+        5，视频中带有抖动字样更容易通过审核。\n\n
+        6，为加强用户的隐私性，允许可对视频中人物面部等重要部分遮挡或打马赛克。
+    </string>
+
+    <string name="rights_stated">
+        1、成为会员后观看视频时，可极速减少广告时间。\n\n
+        2、会员用户可以对视频进行无限制评论。\n\n
+        3、更多会员特权尽情期待…
+    </string>
+</resources>

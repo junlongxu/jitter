@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_242A37">
+
+    <!--余额布局-->
+    <include
+        android:visibility="gone"
+        android:id="@+id/balanceView"
+        layout="@layout/layout_mybalance"/>
+
+    <!--抖币布局-->
+    <include
+        android:visibility="gone"
+        android:id="@+id/coinsView"
+        layout="@layout/layout_mycoins"/>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="15dp"
+        app:cardElevation="15sp"
+        app:cardMaxElevation="15dp"
+        android:elevation="10dp"
+        android:translationZ="10dp"
+        android:layout_margin="15dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/color_242A37">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/WhiteTextStyle"
+                android:text="————余额流水————"
+                android:textStyle="bold"
+                android:id="@+id/myflow_title"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/item_layout_record"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

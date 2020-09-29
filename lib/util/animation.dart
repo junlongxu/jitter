@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ScaleAnimationRoute extends StatefulWidget {
+  final Widget child;
+  const ScaleAnimationRoute({this.child});
   @override
   _ScaleAnimationRouteState createState() => new _ScaleAnimationRouteState();
 }
@@ -14,16 +16,19 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
   initState() {
     super.initState();
     controller = new AnimationController(
-        duration: const Duration(seconds: 1), vsync: this);
+        duration: const Duration(milliseconds: 800), vsync: this);
     //图片宽高从0变到300
-    animation = new Tween(begin: 0.0, end: 300.0).animate(controller);
+    animation = new Tween(begin: 800.0, end: 80.0).animate(controller);
     animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         //动画执行结束时反向执行动画
-        controller.reverse();
+        controller.stop();
+        // controller.reverse();
       } else if (status == AnimationStatus.dismissed) {
         //动画恢复到初始状态时执行动画（正向）
-        controller.forward();
+        controller.reverse();
+        // controller.forward();
+        // controller.forward();
       }
     });
 
@@ -35,7 +40,7 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animation,
-      child: Image.asset("assets/images/share.png"),
+      child: widget?.child,
       builder: (BuildContext ctx, Widget child) {
         return new Center(
           child: Container(
@@ -55,6 +60,7 @@ class _ScaleAnimationRouteState extends State<ScaleAnimationRoute>
   }
 }
 
+// 缩放动画
 class AnimatedSwitcherCounterRoute extends StatefulWidget {
   final bool showState;
   final Widget child;
@@ -73,6 +79,10 @@ class AnimatedSwitcherCounterRoute extends StatefulWidget {
 class _AnimatedSwitcherCounterRouteState
     extends State<AnimatedSwitcherCounterRoute> {
   // bool _count = true;
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +95,7 @@ class _AnimatedSwitcherCounterRouteState
             transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
               return ScaleTransition(
-                  child: child,
-                  scale: animation,
-                  alignment: widget?.alignment);
+                  child: child, scale: animation, alignment: widget?.alignment);
             },
             child: Container(
               child: widget?.child,

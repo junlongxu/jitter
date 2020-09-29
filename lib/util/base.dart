@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 abstract class Base {
   final Color themeColor = Color(0xff242a37);
   final Color skyGray = Color(0xff727e99);
   final double boundarySize = 10.0;
 
-  final TextStyle skyGraySmallTextStyle =
-      TextStyle(fontSize: 12, color: Color(0xff727e99), fontWeight: FontWeight.w500);
-  
-  final TextStyle smallTextStyle =
-      TextStyle(fontSize: 12, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
-  final TextStyle mediumTextStyle =
-      TextStyle(fontSize: 14, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
-  final TextStyle largeTextStyle =
-      TextStyle(fontSize: 16, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
-      final TextStyle maxTextStyle =
-      TextStyle(fontSize: 18, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
+  final TextStyle skyGraySmallTextStyle = TextStyle(
+      fontSize: 12,
+      decoration: TextDecoration.none,
+      color: Color(0xff727e99),
+      fontWeight: FontWeight.w500);
+
+  final TextStyle smallTextStyle = TextStyle(
+      fontSize: 12,
+      decoration: TextDecoration.none,
+      color: Color(0xffdedfe1),
+      fontWeight: FontWeight.w500);
+  final TextStyle mediumTextStyle = TextStyle(
+      fontSize: 14,
+      decoration: TextDecoration.none,
+      color: Color(0xffdedfe1),
+      fontWeight: FontWeight.w500);
+  final TextStyle largeTextStyle = TextStyle(
+      fontSize: 16,
+      decoration: TextDecoration.none,
+      color: Color(0xffdedfe1),
+      fontWeight: FontWeight.w500);
+  final TextStyle maxTextStyle = TextStyle(
+      fontSize: 18, color: Color(0xffdedfe1), fontWeight: FontWeight.w500);
   Shader textGradient(Color beginColor, Color endColor) => LinearGradient(
           colors: [beginColor, endColor],
           begin: Alignment.bottomLeft,
@@ -49,4 +62,21 @@ abstract class Base {
         child: child,
       );
   get emptyWidget => Container(width: 0, height: 0);
+
+  EdgeInsets mediaPadding(context) => MediaQuery.of(context).padding;
+
+  void showToast(
+    String text, {
+    gravity: ToastGravity.CENTER,
+    toastLength: Toast.LENGTH_SHORT,
+  }) {
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color(0xff20242f),
+        textColor: Colors.white,
+        fontSize: 12.0);
+  }
 }

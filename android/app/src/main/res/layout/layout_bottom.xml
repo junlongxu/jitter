@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/drawable_bottom_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/bottom_tv_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="@color/color_3a3a3a"
+        android:textSize="18sp"
+        tools:text="男" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_dedede" />
+
+    <TextView
+        android:id="@+id/bottom_tv_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="@color/color_3a3a3a"
+        android:textSize="18sp"
+        tools:text="女" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/color_dedede" />
+
+    <TextView
+        android:id="@+id/bottom_tv_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="@color/color_3a3a3a"
+        android:textSize="18sp"
+        tools:text="取消" />
+
+</LinearLayout>
